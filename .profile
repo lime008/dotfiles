@@ -7,5 +7,5 @@ export PATH=$GOPATH/bin:$PATH
 export GO111MODULE=on
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH=$HOME/.yarn/bin:$PATH
-export PATH=$PATH:/home/lime/.linkerd2/bin
+export PATH=$PATH:$HOME/.linkerd2/bin
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
