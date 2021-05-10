@@ -74,6 +74,9 @@ let base16colorspace=256
 colorscheme base16-gruvbox-dark-hard
 set termguicolors
 
+" fzf
+nnoremap <C-p> :<C-u>FZF<CR> 
+
 " set the default encoding to utf-8
 set encoding=utf-8
 set fileencoding=utf-8
@@ -104,6 +107,13 @@ set tabstop=4
 set shiftwidth=4
 
 set ruler
+
+set cursorline " enable the highlighting of the current line
+
+" disable the bell and visual bell ---------------
+set vb
+set t_vb=
+" ------------------------------------------------
 
 "" searching
 set hlsearch        " highlight search
@@ -220,18 +230,16 @@ augroup VimCSS3Syntax
 augroup END
 
 " ALE settings
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'eslint'],
+\}
 let g:ale_fix_on_save = 1
 nmap gd :ALEGoToDefinition<CR> " enable the vim gd command for ALE
-set cursorline " enable the highlighting of the current line
-
-" disable the bell and visual bell ---------------
-set vb
-set t_vb=
-" ------------------------------------------------
 
 " grep.vim
 nnoremap <silent> <leader>f :Rgrep<CR>
 let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
 let Grep_Skip_Dirs = '.git node_modules'
-
