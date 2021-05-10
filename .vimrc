@@ -74,6 +74,9 @@ let base16colorspace=256
 colorscheme base16-gruvbox-dark-hard
 set termguicolors
 
+" fzf
+nnoremap <C-p> :<C-u>FZF<CR> 
+
 " set the default encoding to utf-8
 set encoding=utf-8
 set fileencoding=utf-8
