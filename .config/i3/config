@@ -4,6 +4,8 @@
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
 #
+#
+exec picom &
 
 # i3 config file (v4)
 #
@@ -32,7 +34,6 @@ exec --no-startup-id nm-applet
 
 exec --no-startup-id nitrogen --restore
 
-exec picom &
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -194,6 +195,9 @@ bar {
 	colors {
 		background #00000080
 	}
+	tray_padding 6
+	height 40
+	workspace_min_width 30
 }
 
 for_window [class=".*"] border pixel 0
