@@ -27,14 +27,21 @@ Plug 'Xuyuanp/nerdtree-git-plugin' " show git file status in nerdTree
 Plug 'editorconfig/editorconfig-vim' " load the editorconfig for the project ( correct indentation rules etc. )
 Plug 'vim-scripts/Vimchant' " spell checking
 
+" completion
+" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'dense-analysis/ale' " linting
+Plug 'maralla/completor.vim', { 'do': 'make js' }
+
 " purely visual
 Plug 'vim-airline/vim-airline' " fancier status line
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim' " base16 colorschemes
+Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 Plug 'airblade/vim-gitgutter' " show git diff status aside line numbers
 Plug 'arcticicestudio/nord-vim'
+Plug 'https://gitlab.com/gi1242/vim-emoji-ab.git'
 
-" go 
+" go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " javascript
@@ -46,7 +53,6 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'branch': 'release/0.x'
   \ }
-Plug 'dense-analysis/ale' " javascript linting
 
 " css
 Plug 'hail2u/vim-css3-syntax'
@@ -56,9 +62,6 @@ Plug 'HerringtonDarkholme/yats.vim'
 
 " emmet plugin
 Plug 'mattn/emmet-vim'
-
-" completor
-Plug 'maralla/completor.vim', { 'do': 'make js' }
 
 " handy tools - not mandatory
 Plug 'christianrondeau/vim-base64' " encode and decode base64
@@ -71,11 +74,16 @@ call plug#end()
 
 " set the colorscheme
 let base16colorspace=256
-colorscheme base16-gruvbox-dark-hard
+colorscheme base16-snazzy " base16-porple base16-gruvbox-dark-hard just if I change my mind
 set termguicolors
 
+" fix gitgutter colors
+" highlight GitGutterAdd guibg=NONE ctermbg=NONE
+" highlight GitGutterDelete guibg=NONE ctermbg=NONE
+" highlight GitGutterChange guibg=NONE ctermbg=NONE
+
 " fzf
-nnoremap <C-p> :<C-u>FZF<CR> 
+nnoremap <C-p> :<C-u>FZF<CR>
 
 " set the default encoding to utf-8
 set encoding=utf-8
@@ -97,10 +105,6 @@ highlight clear SignColumn
 highlight LineNr ctermfg=gray ctermbg=black
 highlight! link SignColumn LineNr
 
-" fix gitgutter colors
-highlight GitGutterAdd guibg=NONE ctermbg=NONE
-highlight GitGutterDelete guibg=NONE ctermbg=NONE
-highlight GitGutterChange guibg=NONE ctermbg=NONE
 
 " set the tab width to 4 and force soft tabs
 set tabstop=4
@@ -206,7 +210,7 @@ let g:go_addtags_transform = 'camelcase'
 
 " vim-airline settings ---------------------------
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'base16_gruvbox_dark_hard'
+let g:airline_theme = 'base16_snazzy'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -232,8 +236,8 @@ augroup END
 " ALE settings
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'eslint'],
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
 \}
 let g:ale_fix_on_save = 1
 nmap gd :ALEGoToDefinition<CR> " enable the vim gd command for ALE
