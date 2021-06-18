@@ -56,6 +56,7 @@ Plug 'prettier/vim-prettier', {
 
 " css
 Plug 'hail2u/vim-css3-syntax'
+Plug 'ap/vim-css-color'
 
 " typescript
 Plug 'HerringtonDarkholme/yats.vim'
