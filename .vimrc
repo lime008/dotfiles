@@ -75,7 +75,7 @@ call plug#end()
 
 " set the colorscheme
 let base16colorspace=256
-colorscheme base16-snazzy " base16-porple base16-gruvbox-dark-hard just if I change my mind
+colorscheme base16-limetty " base16-snazzy base16-porple base16-gruvbox-dark-hard just if I change my mind
 set termguicolors
 
 " fix gitgutter colors
@@ -196,9 +196,9 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 " ------------------------------------------------
 
 " vim-go settings --------------------------------
-let g:go_fmt_command = 'goimports'
+let g:go_fmt_command = 'gopls'
+let g:go_gopls_gofumpt = 1
 let g:go_auto_type_info = 1
-let g:go_fmt_experimental = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -211,7 +211,7 @@ let g:go_addtags_transform = 'camelcase'
 
 " vim-airline settings ---------------------------
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'base16_snazzy'
+let g:airline_theme = 'base16_limetty'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -226,7 +226,7 @@ let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#jsx_bracket_same_line = 'false'
 let g:prettier#config#trailing_comma = 'all'
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue PrettierAsync
+autocmd BufWritePre *.java,*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue PrettierAsync
 
 " CSS settings
 augroup VimCSS3Syntax
