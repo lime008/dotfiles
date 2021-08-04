@@ -5,7 +5,7 @@
 # this file and re-run i3-config-wizard(1).
 #
 #
-exec picom &
+exec --no-startup-id picom &
 
 # i3 config file (v4)
 #
@@ -17,7 +17,7 @@ set $mod Mod1
 font pango:Fira Code 8
 
 # Set keyboard repeat rate and mouse acceleration speed
-exec_always xset r rate 300 80
+exec_always --no-startup-id xset r rate 300 80
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
