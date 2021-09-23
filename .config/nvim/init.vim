@@ -8,11 +8,9 @@ let g:pymode_init = 0
 let g:pymode_linit = 0
 
 " DEFINE PLUGINS --------------------------------
-call plug#begin('~/.vim/pluggs')
+call plug#begin('~/.config/nvim/pluggs')
 
 " navigation
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }  " fuzzy finder
-Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree' " file list side bar
 Plug 'low-ghost/nerdtree-fugitive' " add files to commit from nerdtree
 
@@ -24,20 +22,18 @@ Plug 'tpope/vim-rhubarb' " git browse
 Plug 'Xuyuanp/nerdtree-git-plugin' " show git file status in nerdTree
 Plug 'editorconfig/editorconfig-vim' " load the editorconfig for the project ( correct indentation rules etc. )
 Plug 'vim-scripts/Vimchant' " spell checking
+Plug 'nvim-lua/completion-nvim' " lsp completion
 
-" completion
-" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'dense-analysis/ale' " linting
-Plug 'maralla/completor.vim', { 'do': 'make js' }
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-media-files.nvim'
 
 " purely visual
 Plug 'vim-airline/vim-airline' " fancier status line
-Plug 'vim-airline/vim-airline-themes'
-Plug 'chriskempson/base16-vim' " base16 colorschemes
-Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+Plug 'lime008/limetty-vim' " Limetty colorscheme
 Plug 'airblade/vim-gitgutter' " show git diff status aside line numbers
-Plug 'arcticicestudio/nord-vim'
-Plug 'lime008/limetty-vim'
 Plug 'https://gitlab.com/gi1242/vim-emoji-ab.git'
 
 " go
@@ -45,20 +41,12 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " javascript
 Plug 'pangloss/vim-javascript' " javascript support
-Plug 'ternjs/tern_for_vim', {'do': 'yarn install'} " javascript autocompletion
 Plug 'evanleck/vim-svelte' " svelte support
 Plug 'styled-components/vim-styled-components', {'branch': 'main'}
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'branch': 'release/0.x'
   \ }
-
-" css
-Plug 'hail2u/vim-css3-syntax'
-Plug 'ap/vim-css-color'
-
-" typescript
-Plug 'HerringtonDarkholme/yats.vim'
 
 " emmet plugin
 Plug 'mattn/emmet-vim'
@@ -69,6 +57,12 @@ Plug 'junegunn/goyo.vim' " hide everything but the current buffer ( helps to foc
 " Plug 'knubie/vim-kitty-navigator' " seemless navigation with the kitty terminal windows
 Plug 'yegappan/grep' " quick grep in the current directory
 Plug 'sk1418/HowMuch' " evaluate math formulas with visual selections
+
+" LSP
+Plug 'neovim/nvim-lspconfig'
+
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
@@ -82,8 +76,6 @@ set termguicolors
 " highlight GitGutterDelete guibg=NONE ctermbg=NONE
 " highlight GitGutterChange guibg=NONE ctermbg=NONE
 
-" fzf
-nnoremap <C-p> :<C-u>FZF<CR>
 
 " set the default encoding to utf-8
 set encoding=utf-8
@@ -161,6 +153,13 @@ func! SetKeyMappings()
 	vnoremap <^]-j> :m '>+1<CR>gv=gv
 	vnoremap <^]-k> :m '<-2<CR>gv=gv
 	" ------------------------------------------------
+	
+	" telescope 
+	nnoremap <C-p> <cmd>lua require('telescope.builtin').git_files()<cr>
+	nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+	nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+	nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+	nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 endfunc
 
 nnoremap <Leader>o :.Gbrowse<CR>
@@ -183,14 +182,6 @@ nnoremap <silent> <Leader>cff :NERDTreeFind<CR>
 nnoremap <silent> <F3> :NERDTreeToggle<CR>
 " ------------------------------------------------
 
-" Completor Settings -----------------------------
-
-let g:completor_filetype_map = {
-	\ 'go': {'ft': 'lsp', 'cmd': 'gopls'}
-	\}
-
-" ------------------------------------------------
-
 " UltiSnips settings -----------------------------
 let g:UltiSnipsListSnippets = "<c-tab>"
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -201,13 +192,6 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:go_fmt_command = 'gopls'
 let g:go_gopls_gofumpt = 1
 let g:go_auto_type_info = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_code_completion_enabled = 1
 let g:go_addtags_transform = 'camelcase'
 " ------------------------------------------------
 
@@ -230,25 +214,49 @@ let g:prettier#config#trailing_comma = 'all'
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.java,*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue PrettierAsync
 
-" CSS settings
-augroup VimCSS3Syntax
-  autocmd!
-  autocmd FileType css setlocal iskeyword+=-
-augroup END
+" " grep.vim
+" nnoremap <silent> <leader>f :Rgrep<CR>
+" let Grep_Default_Options = '-IR'
+" let Grep_Skip_Files = '*.log *.db'
+" let Grep_Skip_Dirs = '.git node_modules'
 
-" ALE settings
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint'],
-\}
-let g:ale_fix_on_save = 1
-nmap gd :ALEGoToDefinition<CR> " enable the vim gd command for ALE
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+let g:completion_enable_snippet = 'UltiSnips'
 
-" grep.vim
-nnoremap <silent> <leader>f :Rgrep<CR>
-let Grep_Default_Options = '-IR'
-let Grep_Skip_Files = '*.log *.db'
-let Grep_Skip_Dirs = '.git node_modules'
+" Avoid showing message extra message when using completion
+set shortmess+=c
+
+" LSP
+lua << EOF
+require'lspconfig'.gopls.setup{}
+require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
+require'lspconfig'.tsserver.setup{}
+require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
+require'lspconfig'.cssls.setup{}
+require'lspconfig'.cssls.setup{on_attach=require'completion'.on_attach}
+
+-- Treesitter configuration
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true
+  }
+}
+
+-- Telescope
+require('telescope').setup{
+	defaults = {
+		file_ignore_patterns = { "node_modules" }
+	},
+	extensions = {
+		media_files = {
+			filetypes = {"png", "jpg", "jpeg", "webp", "webm", "mp4", "pdf"}
+		}
+	}
+}
+require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('media_files')
+EOF
 
 autocmd VimEnter * call SetKeyMappings()
