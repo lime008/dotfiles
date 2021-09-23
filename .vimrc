@@ -143,10 +143,10 @@ set listchars=tab:►\ ,space:·,nbsp:⎵
 nmap <F8> :TagbarToggle<CR>
 
 " map the hjkl keys to navigate between splits ---
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-l> :wincmd l<CR>
+nmap <silent> <C-k> :wincmd k<CR>
+nmap <silent> <C-j> :wincmd j<CR>
+nmap <silent> <C-h> :wincmd h<CR>
+nmap <silent> <C-l> :wincmd l<CR>
 " ------------------------------------------------
 
 noremap <Leader>h :<C-u>split<CR>
@@ -191,8 +191,8 @@ let g:completor_filetype_map = {
 
 " UltiSnips settings -----------------------------
 let g:UltiSnipsListSnippets = "<c-tab>"
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
 " ------------------------------------------------
 
 " vim-go settings --------------------------------
@@ -247,4 +247,4 @@ nmap gd :ALEGoToDefinition<CR> " enable the vim gd command for ALE
 nnoremap <silent> <leader>f :Rgrep<CR>
 let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
-let Grep_Skip_Dirs = '.git node_modules'
+let Grep_Skip_Dirs = '.git node_modules .next'
