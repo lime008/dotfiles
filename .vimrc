@@ -7,8 +7,6 @@ let g:pymode_virtalenv=0
 let g:pymode_init = 0
 let g:pymode_linit = 0
 
-packloadall
-
 " DEFINE PLUGINS --------------------------------
 call plug#begin('~/.vim/pluggs')
 
@@ -39,6 +37,7 @@ Plug 'chriskempson/base16-vim' " base16 colorschemes
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 Plug 'airblade/vim-gitgutter' " show git diff status aside line numbers
 Plug 'arcticicestudio/nord-vim'
+Plug 'lime008/limetty-vim'
 Plug 'https://gitlab.com/gi1242/vim-emoji-ab.git'
 
 " go
@@ -67,7 +66,7 @@ Plug 'mattn/emmet-vim'
 " handy tools - not mandatory
 Plug 'christianrondeau/vim-base64' " encode and decode base64
 Plug 'junegunn/goyo.vim' " hide everything but the current buffer ( helps to focus )
-Plug 'knubie/vim-kitty-navigator' " seemless navigation with the kitty terminal windows
+" Plug 'knubie/vim-kitty-navigator' " seemless navigation with the kitty terminal windows
 Plug 'yegappan/grep' " quick grep in the current directory
 Plug 'sk1418/HowMuch' " evaluate math formulas with visual selections
 
@@ -75,7 +74,7 @@ call plug#end()
 
 " set the colorscheme
 let base16colorspace=256
-colorscheme base16-limetty " base16-snazzy base16-porple base16-gruvbox-dark-hard just if I change my mind
+colorscheme limetty " base16-snazzy base16-porple base16-gruvbox-dark-hard just if I change my mind
 set termguicolors
 
 " fix gitgutter colors
@@ -139,27 +138,30 @@ set guifont=Fira\ Code\ 8
 " set list charracters
 set listchars=tab:►\ ,space:·,nbsp:⎵
 
-" set the key to toggle the tag bar
-nmap <F8> :TagbarToggle<CR>
 
-" map the hjkl keys to navigate between splits ---
-nmap <silent> <C-k> :wincmd k<CR>
-nmap <silent> <C-j> :wincmd j<CR>
-nmap <silent> <C-h> :wincmd h<CR>
-nmap <silent> <C-l> :wincmd l<CR>
-" ------------------------------------------------
+func! SetKeyMappings()
+	" set the key to toggle the tag bar
+	nmap <F8> :TagbarToggle<CR>
 
-noremap <Leader>h :<C-u>split<CR>
-noremap <Leader>v :<C-u>vsplit<CR>
+	" map the hjkl keys to navigate between splits ---
+	nmap <silent> <c-k> :wincmd k<CR>
+	nmap <silent> <c-j> :wincmd j<CR>
+	nmap <silent> <c-h> :wincmd h<CR>
+	nmap <silent> <c-l> :wincmd l<CR>
+	" ------------------------------------------------
 
-" map the jk keys to move lines ------------------
-nnoremap <^]-j> :m .+1<CR>==
-nnoremap <^]-k> :m .-2<CR>==
-inoremap <^]-j> <Esc>:m .+1<CR>==gi
-inoremap <^]-k> <Esc>:m .-2<CR>==gi
-vnoremap <^]-j> :m '>+1<CR>gv=gv
-vnoremap <^]-k> :m '<-2<CR>gv=gv
-" ------------------------------------------------
+	noremap <Leader>h :<C-u>split<CR>
+	noremap <Leader>v :<C-u>vsplit<CR>
+
+	" map the jk keys to move lines ------------------
+	nnoremap <^]-j> :m .+1<CR>==
+	nnoremap <^]-k> :m .-2<CR>==
+	inoremap <^]-j> <Esc>:m .+1<CR>==gi
+	inoremap <^]-k> <Esc>:m .-2<CR>==gi
+	vnoremap <^]-j> :m '>+1<CR>gv=gv
+	vnoremap <^]-k> :m '<-2<CR>gv=gv
+	" ------------------------------------------------
+endfunc
 
 nnoremap <Leader>o :.Gbrowse<CR>
 
@@ -211,7 +213,7 @@ let g:go_addtags_transform = 'camelcase'
 
 " vim-airline settings ---------------------------
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'base16_limetty'
+let g:airline_theme = 'limetty'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -248,3 +250,5 @@ nnoremap <silent> <leader>f :Rgrep<CR>
 let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
 let Grep_Skip_Dirs = '.git node_modules .next'
+
+autocmd VimEnter * call SetKeyMappings()
