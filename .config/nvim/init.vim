@@ -153,13 +153,21 @@ func! SetKeyMappings()
 	vnoremap <^]-j> :m '>+1<CR>gv=gv
 	vnoremap <^]-k> :m '<-2<CR>gv=gv
 	" ------------------------------------------------
-	
-	" telescope 
+
+	" telescope
 	nnoremap <C-p> <cmd>lua require('telescope.builtin').git_files()<cr>
 	nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 	nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 	nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 	nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+	" lsp
+	nnoremap gd <cmd>lua vim.lsp.buf.definition()<cr>
+	nnoremap gr <cmd>lua vim.lsp.buf.references()<cr>
+	nnoremap gD <cmd>lua vim.lsp.buf.declaration()<cr>
+	nnoremap K <cmd>lua vim.lsp.buf.hover()<cr>
+	nnoremap <Leader>rn <cmd>lua vim.lsp.buf.rename()<cr>
+	nnoremap <Leader>ca <cmd>lua vim.lsp.buf.code_action()<cr>
 endfunc
 
 nnoremap <Leader>o :.Gbrowse<CR>
