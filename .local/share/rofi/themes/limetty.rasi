@@ -1,5 +1,5 @@
 /**
- * Base16 Limetty ROFI Color theme
+ * Limetty ROFI Color theme
  *
  * Authors
  *  Scheme: Miika Petäjäniemi (lime.b.cool@gmail.com), lime008 (https://github.com/lime00/limetty)
@@ -35,6 +35,7 @@
     alternate-urgent-foreground: @red;
     alternate-urgent-background: @lightbg;
     spacing:                     2;
+	font: "Fira Code 12";
 }
 window {
     background-color: @background;
@@ -63,41 +64,47 @@ listview {
 }
 element {
     border:           0;
-    padding:          1px ;
+    padding:          1px;
 }
-element normal.normal {
+element-text {
+	text-color: inherit;
+}
+element-icon {
+margin: 0 10px 0 0;
+}
+element.normal.normal {
     background-color: @normal-background;
     text-color:       @normal-foreground;
 }
-element normal.urgent {
+element.normal.urgent {
     background-color: @urgent-background;
     text-color:       @urgent-foreground;
 }
-element normal.active {
+element.normal.active {
     background-color: @active-background;
     text-color:       @active-foreground;
 }
-element selected.normal {
+element.selected.normal {
     background-color: @selected-normal-background;
     text-color:       @selected-normal-foreground;
 }
-element selected.urgent {
+element.selected.urgent {
     background-color: @selected-urgent-background;
     text-color:       @selected-urgent-foreground;
 }
-element selected.active {
+element.selected.active {
     background-color: @selected-active-background;
     text-color:       @selected-active-foreground;
 }
-element alternate.normal {
+element.alternate.normal {
     background-color: @alternate-normal-background;
     text-color:       @alternate-normal-foreground;
 }
-element alternate.urgent {
+element.alternate.urgent {
     background-color: @alternate-urgent-background;
     text-color:       @alternate-urgent-foreground;
 }
-element alternate.active {
+element.alternate.active {
     background-color: @alternate-active-background;
     text-color:       @alternate-active-foreground;
 }
@@ -116,7 +123,7 @@ button {
     spacing:          0;
     text-color:       @normal-foreground;
 }
-button selected {
+button.selected {
     background-color: @selected-normal-background;
     text-color:       @selected-normal-foreground;
 }

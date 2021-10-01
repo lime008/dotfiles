@@ -69,7 +69,8 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+d exec "rofi -modi drun,run -show drun"
+bindsym $mod+d exec "rofi -combi-modi drun,run -show combi -show-icons"
+bindsym $mod+w exec "rofi -combi-modi window -show window"
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -172,8 +173,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+x exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # Take screenshots
-bindsym Print exec gnome-screenshot -a
-bindsym $mod+Print exec peek
+bindsym Print exec maim -s ~/Pictures/screenshot-$(date +%s).png
+bindsym Control+Print exec peek
 
 # resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
@@ -225,4 +226,4 @@ for_window [class=".*"] title_format "<span size='medium'>%class  %title</span>"
 
 gaps inner 20
 smart_gaps inverse_outer
-gaps horizontal 600
+gaps horizontal 200

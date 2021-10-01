@@ -10,7 +10,6 @@ if [[ "$MUTED" == "true" || "$VOLUME" == "0" ]]; then
 	ICON="/usr/share/icons/Flat-Remix-Black-Dark/status/scalable/512/notification-audio-volume-muted.svg"
 	MESSAGE="Muted"
 	LEVEL=2
-	TIME_OUT=0
 elif [ "$VOLUME" -lt "40" ]; then
 	ICON="/usr/share/icons/Flat-Remix-Black-Dark/status/scalable/512/notification-audio-volume-low.svg"
 elif [ "$VOLUME" -lt "70" ]; then

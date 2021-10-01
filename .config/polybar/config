@@ -55,7 +55,7 @@ font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
-modules-left = powermenu filesystem xkeyboard memory cpy wlan eth temperature
+modules-left = powermenu filesystem xkeyboard memory cpy wlan eth temperature battery
 modules-center = date mpd
 modules-right = i3
 
@@ -330,7 +330,7 @@ adapter = ADP1
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+format-charging-underline = #f5a70a
 
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}

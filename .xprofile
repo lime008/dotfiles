@@ -1,3 +1,6 @@
 xset r rate 300 80
 setxkbmap -option "caps:escape,lv3:lwin_switch"
-xinput --set-prop $(xinput list | sed -En "s/.*Mouse\tid=(.*)\t.*/\1/p") 'libinput Accel Speed' -1
+# xinput --set-prop $(xinput list | sed -En "s/.*Mouse\tid=(.*)\t.*/\1/p") 'libinput Accel Speed' -1
+
+xinput set-prop '1A581000:00 06CB:CDA3 Touchpad' 'libinput Tapping Enabled' 1
+xinput set-prop '1A581000:00 06CB:CDA3 Touchpad' 'libinput Middle Emulation Enabled' 1
