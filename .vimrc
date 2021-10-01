@@ -193,8 +193,8 @@ let g:completor_filetype_map = {
 
 " UltiSnips settings -----------------------------
 let g:UltiSnipsListSnippets = "<c-tab>"
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
 " ------------------------------------------------
 
 " vim-go settings --------------------------------
@@ -249,6 +249,6 @@ nmap gd :ALEGoToDefinition<CR> " enable the vim gd command for ALE
 nnoremap <silent> <leader>f :Rgrep<CR>
 let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
-let Grep_Skip_Dirs = '.git node_modules'
+let Grep_Skip_Dirs = '.git node_modules .next'
 
 autocmd VimEnter * call SetKeyMappings()

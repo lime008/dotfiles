@@ -225,5 +225,3 @@ for_window [class=".*"] border pixel 0
 for_window [class=".*"] title_format "<span size='medium'>%class  %title</span>"
 
 gaps inner 20
-smart_gaps inverse_outer
-gaps horizontal 200
