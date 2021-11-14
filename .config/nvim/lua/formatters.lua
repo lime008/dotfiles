@@ -36,11 +36,32 @@ local golines = function()
 	}
 end
 
+local stylua = function()
+	return {
+		exe = "stylua",
+		args = {
+			"-",
+		},
+		stdin = true,
+	}
+end
 
-return require('formatter').setup({
+require("formatter").setup({
 	filetype = {
 		javascript = { prettier },
 		json = { prettier },
+		markdown = { prettier },
 		go = { gofumpt, golines },
+		lua = { stylua },
 	},
 })
+
+vim.api.nvim_exec(
+	[[
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost *.js,*.json,*.ts,*.lua,*.md,*.go FormatWrite
+augroup END
+]],
+	true
+)
