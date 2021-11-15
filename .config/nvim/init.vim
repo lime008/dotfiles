@@ -22,7 +22,15 @@ Plug 'tpope/vim-rhubarb' " git browse
 Plug 'Xuyuanp/nerdtree-git-plugin' " show git file status in nerdTree
 Plug 'editorconfig/editorconfig-vim' " load the editorconfig for the project ( correct indentation rules etc. )
 Plug 'vim-scripts/Vimchant' " spell checking
-Plug 'nvim-lua/completion-nvim' " lsp completion
+" Plug 'nvim-lua/completion-nvim' " lsp completion [ARCHIVED]
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+" UltiSnips completion
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -45,7 +53,7 @@ Plug 'evanleck/vim-svelte' " svelte support
 Plug 'styled-components/vim-styled-components', {'branch': 'main'}
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
-  \ 'branch': 'release/0.x'
+  \ 'branch': 'release/1.x'
   \ }
 
 " emmet plugin
@@ -63,6 +71,10 @@ Plug 'neovim/nvim-lspconfig'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" bookmarks
+" Plug 'MattesGroeger/vim-bookmarks'
+" Plug 'tom-anders/telescope-vim-bookmarks.nvim'
 
 call plug#end()
 
@@ -92,11 +104,6 @@ let mapleader=","
 
 " turn on syntax highlighting
 syntax on
-highlight clear LineNr
-highlight clear SignColumn
-highlight LineNr ctermfg=gray ctermbg=black
-highlight! link SignColumn LineNr
-
 
 " set the tab width to 4 and force soft tabs
 set tabstop=4
@@ -160,6 +167,7 @@ func! SetKeyMappings()
 	nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 	nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 	nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+	"nnoremap <leader>bm <cmd>lua require('telescope').extensions.vim_bookmarks.all()<cr>
 
 	" lsp
 	nnoremap gd <cmd>lua vim.lsp.buf.definition()<cr>
@@ -201,6 +209,7 @@ let g:go_fmt_command = 'gopls'
 let g:go_gopls_gofumpt = 1
 let g:go_auto_type_info = 1
 let g:go_addtags_transform = 'camelcase'
+let g:go_doc_keywordprg_enabled = 0
 " ------------------------------------------------
 
 " vim-airline settings ---------------------------
@@ -235,25 +244,51 @@ let g:completion_enable_snippet = 'UltiSnips'
 " Avoid showing message extra message when using completion
 set shortmess+=c
 
+let g:markdown_fenced_languages = ['bash=sh', 'javascript', 'js=javascript', 'json=javascript', 'typescript', 'ts=typescript', 'php', 'html', 'css', 'rust', 'go']
+
 " LSP
 lua << EOF
-require'lspconfig'.gopls.setup{}
-require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
-require'lspconfig'.tsserver.setup{}
-require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
-require'lspconfig'.cssls.setup{}
-require'lspconfig'.cssls.setup{on_attach=require'completion'.on_attach}
+local nvim_lsp = require 'lspconfig'
+local cmp = require 'cmp'
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			vim.fn["UltiSnips#Anon"](args.body)
+		end
+	},
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp' },
+		{ name = 'ultisnips' },
+	},{
+		{ name = 'buffer' },
+	})
+})
+
+local servers = {'gopls', 'tsserver', 'cssls', 'terraformls'}
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+for _, lsp in ipairs(servers) do
+	nvim_lsp[lsp].setup{
+		on_attach = on_attach,
+		capabilities = capabilities
+	}
+end
 
 -- Treesitter configuration
-require'nvim-treesitter.configs'.setup {
+local ts = require'nvim-treesitter.configs'
+ts.setup {
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
     enable = true
+  },
+  indent = {
+	enable = true
   }
 }
 
 -- Telescope
-require('telescope').setup{
+local telescope = require 'telescope'
+telescope.setup{
 	defaults = {
 		file_ignore_patterns = { "node_modules", ".next" }
 	},
@@ -263,8 +298,9 @@ require('telescope').setup{
 		}
 	}
 }
-require('telescope').load_extension('fzy_native')
-require('telescope').load_extension('media_files')
+telescope.load_extension('fzy_native')
+telescope.load_extension('media_files')
+-- require('telescope').load_extension('vim_bookmarks')
 EOF
 
 autocmd VimEnter * call SetKeyMappings()
