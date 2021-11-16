@@ -103,6 +103,7 @@ set tabstop=4
 set shiftwidth=4
 
 set ruler
+set scrolloff=8
 
 set cursorline " enable the highlighting of the current line
 
@@ -237,17 +238,20 @@ set shortmess+=c
 
 " LSP
 lua << EOF
-require'lspconfig'.gopls.setup{}
 require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
-require'lspconfig'.tsserver.setup{}
-require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
-require'lspconfig'.cssls.setup{}
 require'lspconfig'.cssls.setup{on_attach=require'completion'.on_attach}
+require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
 
 -- Treesitter configuration
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
+    enable = true
+  },
+  indent = {
+    enable = true
+  },
+  fold = {
     enable = true
   }
 }
