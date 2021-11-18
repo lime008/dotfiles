@@ -44,6 +44,7 @@ set tabstop=4
 set shiftwidth=4
 
 set ruler
+set scrolloff=8
 
 set cursorline " enable the highlighting of the current line
 

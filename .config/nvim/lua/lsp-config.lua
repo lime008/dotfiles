@@ -21,6 +21,9 @@ ts.setup({
 	indent = {
 		enable = true,
 	},
+	folding = {
+		enable = true,
+	},
 })
 
 -- Telescope
