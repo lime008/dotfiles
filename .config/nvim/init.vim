@@ -3,80 +3,16 @@
 " #                 BY                  #
 " #               LIME008               #
 " #######################################
+"
+"
+lua require('plugins')
+
+" map the leader key to comma
+let mapleader=","
+
 let g:pymode_virtalenv=0
 let g:pymode_init = 0
 let g:pymode_linit = 0
-
-" DEFINE PLUGINS --------------------------------
-call plug#begin('~/.config/nvim/pluggs')
-
-" navigation
-Plug 'scrooloose/nerdtree' " file list side bar
-Plug 'low-ghost/nerdtree-fugitive' " add files to commit from nerdtree
-
-" common
-Plug 'SirVer/ultisnips' " snippet support
-Plug 'tpope/vim-commentary' " comment out lines
-Plug 'tpope/vim-fugitive' " git commands for vim
-Plug 'tpope/vim-rhubarb' " git browse
-Plug 'Xuyuanp/nerdtree-git-plugin' " show git file status in nerdTree
-Plug 'editorconfig/editorconfig-vim' " load the editorconfig for the project ( correct indentation rules etc. )
-Plug 'vim-scripts/Vimchant' " spell checking
-" Plug 'nvim-lua/completion-nvim' " lsp completion [ARCHIVED]
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-
-" UltiSnips completion
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'nvim-telescope/telescope-media-files.nvim'
-
-" purely visual
-Plug 'vim-airline/vim-airline' " fancier status line
-Plug 'lime008/limetty-vim' " Limetty colorscheme
-Plug 'airblade/vim-gitgutter' " show git diff status aside line numbers
-Plug 'https://gitlab.com/gi1242/vim-emoji-ab.git'
-
-" go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-" javascript
-Plug 'pangloss/vim-javascript' " javascript support
-Plug 'evanleck/vim-svelte' " svelte support
-Plug 'styled-components/vim-styled-components', {'branch': 'main'}
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/1.x'
-  \ }
-
-" emmet plugin
-Plug 'mattn/emmet-vim'
-
-" handy tools - not mandatory
-Plug 'christianrondeau/vim-base64' " encode and decode base64
-Plug 'junegunn/goyo.vim' " hide everything but the current buffer ( helps to focus )
-" Plug 'knubie/vim-kitty-navigator' " seemless navigation with the kitty terminal windows
-Plug 'yegappan/grep' " quick grep in the current directory
-Plug 'sk1418/HowMuch' " evaluate math formulas with visual selections
-
-" LSP
-Plug 'neovim/nvim-lspconfig'
-
-" Treesitter
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-" bookmarks
-" Plug 'MattesGroeger/vim-bookmarks'
-" Plug 'tom-anders/telescope-vim-bookmarks.nvim'
-
-call plug#end()
 
 " set the colorscheme
 let base16colorspace=256
@@ -99,8 +35,6 @@ set nocompatible
 set backspace=indent,eol,start
 set history=1000
 
-" map the leader key to comma
-let mapleader=","
 
 " turn on syntax highlighting
 syntax on
@@ -176,12 +110,25 @@ func! SetKeyMappings()
 	nnoremap K <cmd>lua vim.lsp.buf.hover()<cr>
 	nnoremap <Leader>rn <cmd>lua vim.lsp.buf.rename()<cr>
 	nnoremap <Leader>ca <cmd>lua vim.lsp.buf.code_action()<cr>
+
+
+	nnoremap <Leader>o :.Gbrowse<CR>
+
+	" nvim mappings
+	map <C-n> :NvimTreeToggle<CR>
+
+	" nerdtree mappings
+	nnoremap <silent> <Leader>cff :NERDTreeFind<CR>
+	nnoremap <silent> <F3> :NERDTreeToggle<CR>
+
+	" Grep vim
+	nnoremap <silent> <leader>gf :Rgrep<CR>
 endfunc
 
-nnoremap <Leader>o :.Gbrowse<CR>
+
+
 
 " NERDTree Settings ------------------------------
-map <C-n> :NERDTreeToggle<CR>
 
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -194,8 +141,6 @@ let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
 let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-nnoremap <silent> <Leader>cff :NERDTreeFind<CR>
-nnoremap <silent> <F3> :NERDTreeToggle<CR>
 " ------------------------------------------------
 
 " UltiSnips settings -----------------------------
@@ -221,86 +166,22 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
 
-" prettier settings
-let g:prettier#config#use_tabs = 'true'
-let g:prettier#config#semi = 'false'
-let g:prettier#config#single_quote = 'true'
-let g:prettier#config#bracket_spacing = 'true'
-let g:prettier#config#jsx_bracket_same_line = 'false'
-let g:prettier#config#trailing_comma = 'all'
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.java,*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue PrettierAsync
-
 " " grep.vim
-nnoremap <silent> <leader>gf :Rgrep<CR>
 let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
 let Grep_Skip_Dirs = '.git node_modules .next'
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
-let g:completion_enable_snippet = 'UltiSnips'
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
 
 let g:markdown_fenced_languages = ['bash=sh', 'javascript', 'js=javascript', 'json=javascript', 'typescript', 'ts=typescript', 'php', 'html', 'css', 'rust', 'go']
 
-" LSP
-lua << EOF
-local nvim_lsp = require 'lspconfig'
-local cmp = require 'cmp'
-
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			vim.fn["UltiSnips#Anon"](args.body)
-		end
-	},
-	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
-		{ name = 'ultisnips' },
-	},{
-		{ name = 'buffer' },
-	})
-})
-
-local servers = {'gopls', 'tsserver', 'cssls', 'terraformls'}
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-for _, lsp in ipairs(servers) do
-	nvim_lsp[lsp].setup{
-		on_attach = on_attach,
-		capabilities = capabilities
-	}
-end
-
--- Treesitter configuration
-local ts = require'nvim-treesitter.configs'
-ts.setup {
-  ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  highlight = {
-    enable = true
-  },
-  indent = {
-	enable = true
-  }
-}
-
--- Telescope
-local telescope = require 'telescope'
-telescope.setup{
-	defaults = {
-		file_ignore_patterns = { "node_modules", ".next" }
-	},
-	extensions = {
-		media_files = {
-			filetypes = {"png", "jpg", "jpeg", "webp", "webm", "mp4", "pdf"}
-		}
-	}
-}
-telescope.load_extension('fzy_native')
-telescope.load_extension('media_files')
--- require('telescope').load_extension('vim_bookmarks')
-EOF
+lua require('lsp-config')
+lua require('formatters')
+lua require('nvim-tree-config')
+lua require('completions')
 
 autocmd VimEnter * call SetKeyMappings()
