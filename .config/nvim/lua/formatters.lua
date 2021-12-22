@@ -46,6 +46,17 @@ local stylua = function()
 	}
 end
 
+local terraform = function()
+	return {
+		exe = "terraform fmt",
+		args = {
+			"-",
+		},
+		stdin = true,
+	}
+end
+
+
 require("formatter").setup({
 	filetype = {
 		javascript = { prettier },
@@ -54,6 +65,7 @@ require("formatter").setup({
 		markdown = { prettier },
 		go = { gofumpt, golines },
 		lua = { stylua },
+		terraform = { terraform },
 	},
 })
 
