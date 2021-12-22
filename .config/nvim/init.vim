@@ -111,9 +111,10 @@ func! SetKeyMappings()
 	nnoremap K <cmd>lua vim.lsp.buf.hover()<cr>
 	nnoremap <Leader>rn <cmd>lua vim.lsp.buf.rename()<cr>
 	nnoremap <Leader>ca <cmd>lua vim.lsp.buf.code_action()<cr>
+	nnoremap <leader>lsr :.LspRestart<cr>
 
 
-	nnoremap <Leader>o :.Gbrowse<CR>
+	nnoremap <Leader>o :.GBrowse<CR>
 
 	" nvim mappings
 	map <C-n> :NvimTreeToggle<CR>
