@@ -71,6 +71,7 @@ bindsym $mod+Shift+q kill
 # bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym $mod+d exec "rofi -combi-modi drun,run -show combi -show-icons"
 bindsym $mod+w exec "rofi -combi-modi window -show window"
+bindsym $mod+p exec "gopass ls --flat | rofi -i -matching fuzzy -p pass -dmenu | xargs --no-run-if-empty gopass show -c"
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a

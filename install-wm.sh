@@ -17,6 +17,8 @@ viu \
 bat \
 autorandr \
 ripgrep \
+gopass \
+gopass-jsonapi \
 i3exit"
 
 sudo pacman -Sy $PKGS
