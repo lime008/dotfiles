@@ -19,11 +19,16 @@ autorandr \
 ripgrep \
 i3exit"
 
-sudo pacman -S $PKGS
+sudo pacman -Sy $PKGS
 
 # Install packer for neovim
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+PACKER_INSTALL_DIR=~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+if [ ! -d $PACKER_INSTALL_DIR ]; then
+	git clone --depth 1 https://github.com/wbthomason/packer.nvim $PACKER_INSTALL_DIR
+else
+	git -C $PACKER_INSTALL_DIR pull --depth 1 
+fi
 
 # Install nvim dependencies
 nvim +PackerInstall +qall
