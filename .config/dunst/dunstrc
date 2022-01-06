@@ -33,6 +33,8 @@
 	offset = "30x30"
 	origin = "bottom-right"
 
+	notification_limit = 5
+
     # Turn on the progess bar
     progress_bar = true
 
