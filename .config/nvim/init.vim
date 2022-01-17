@@ -112,7 +112,7 @@ func! SetKeyMappings()
 	nnoremap <Leader>e <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>
 	nnoremap <Leader>rn <cmd>lua vim.lsp.buf.rename()<cr>
 	nnoremap <Leader>ca <cmd>lua vim.lsp.buf.code_action()<cr>
-	nnoremap <leader>lsr :.LspRestart<cr>
+	nnoremap <leader>lsr :LspRestart<cr>
 
 
 	nnoremap <Leader>o :.GBrowse<CR>
