@@ -19,7 +19,7 @@ return require("packer").startup(function(use)
 	use("nvim-telescope/telescope-media-files.nvim")
 
 	-- [COMMON]
-	use("SirVer/ultisnips") -- snippet support
+	use("L3MON4D3/LuaSnip") -- snippet support
 	use("tpope/vim-commentary") -- comment out lines
 	use("tpope/vim-fugitive") -- git commands for vim
 	use("tpope/vim-rhubarb") -- git browse
@@ -40,7 +40,7 @@ return require("packer").startup(function(use)
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-cmdline")
 	use("hrsh7th/nvim-cmp")
-	use("quangnguyen30192/cmp-nvim-ultisnips")
+	use("L3MON4D3/cmp_luasnip")
 
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })

@@ -146,12 +146,6 @@ let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 " ------------------------------------------------
 
-" UltiSnips settings -----------------------------
-let g:UltiSnipsListSnippets = "<c-tab>"
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-" ------------------------------------------------
-
 " vim-go settings --------------------------------
 let g:go_fmt_command = 'gopls'
 let g:go_gopls_gofumpt = 1
