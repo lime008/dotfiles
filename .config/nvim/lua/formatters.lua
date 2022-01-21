@@ -13,6 +13,22 @@ local prettier = function()
 	}
 end
 
+local prettierSvg = function()
+	return {
+		exe = "prettier",
+		args = {
+			"--parser html",
+			"--stdin-filepath",
+			vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+			"--single-quote",
+			"--use-tabs",
+			"--trailing-comma=all",
+			"--no-semi",
+		},
+		stdin = true,
+	}
+end
+
 local gofumpt = function()
 	return {
 		exe = "gofumpt",
@@ -56,13 +72,14 @@ local terraform = function()
 	}
 end
 
-
 require("formatter").setup({
 	filetype = {
 		javascript = { prettier },
 		json = { prettier },
 		yaml = { prettier },
 		markdown = { prettier },
+		html = { prettier },
+		svg = { prettierSvg },
 		go = { gofumpt, golines },
 		lua = { stylua },
 		terraform = { terraform },
