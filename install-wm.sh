@@ -1,5 +1,5 @@
 PKGS="git \
-neovim \
+i3exit \
 dunst \
 rofi \
 picom \
@@ -11,17 +11,29 @@ pavucontrol \
 nitrogen \
 playerctl \
 kitty \
-peek \
-maim \
 viu \
 bat \
+peek \
+maim \
 autorandr \
-ripgrep \
 gopass \
 gopass-jsonapi \
-i3exit"
+neovim \
+stylua \
+go \
+ripgrep"
 
 sudo pacman -Sy $PKGS
+
+sudo systemctl enable autorandr
+sudo systemctl start autorandr
+
+# setup config tracking
+REPO=https://github.com/lime008/dotfiles
+DOTFILES="$HOME/.dotfiles"
+git clone --bare $REPO $DOTFILES ||(git --git-dir="$DOTFILES" --work-tree="$HOME" pull)
+git --git-dir=$HOME/.dotfiles config --local status.showUntrackedFiles no
+git config --global alias.dotf '!git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 # Install packer for neovim
 PACKER_INSTALL_DIR=~/.local/share/nvim/site/pack/packer/start/packer.nvim
@@ -33,7 +45,8 @@ else
 fi
 
 # Install nvim dependencies
-nvim +PackerInstall +qall
+nvim +PackerInstall +PackerUpdate +PackerCompile +qall
+nvim +PackerUpdate +qall
+nvim +PackerCompile +qall
 
-sudo systemctl enable autorandr
-sudo systemctl start autorandr
+go install github.com/segmentio/golines@latest
