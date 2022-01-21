@@ -56,10 +56,11 @@ local terraform = function()
 	}
 end
 
-
 require("formatter").setup({
 	filetype = {
 		javascript = { prettier },
+		typescript = { prettier },
+		typescriptreact = { prettier },
 		json = { prettier },
 		yaml = { prettier },
 		markdown = { prettier },
