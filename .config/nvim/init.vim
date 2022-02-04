@@ -67,7 +67,7 @@ set wrap            " enable soft line wrapping
 set cc=81           " set the text margin highlight
 
 " set the font
-set guifont=Fira\ Code\ 8
+set guifont=FiraCode\ Nerd\ Font\ 8
 
 " set list charracters
 set listchars=tab:►\ ,space:·,nbsp:⎵
