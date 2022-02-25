@@ -33,7 +33,7 @@ width = 100%
 height = 35
 ;offset-x = 1%
 ;offset-y = 1%
-fixed-center = false
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -51,11 +51,10 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = Noto Sans:fixed:pixelsize=10;1
-font-1 = Unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+font-1 = siji:pixelsize=10;1
 
 modules-left = powermenu filesystem xkeyboard memory cpy wlan eth temperature battery
-modules-center = date mpd
+modules-center = date
 modules-right = i3
 
 tray-position = right
@@ -82,7 +81,7 @@ width = 100%
 height = 35
 ;offset-x = 1%
 ;offset-y = 1%
-fixed-center = false
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -100,8 +99,7 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = Noto Sans:fixed:pixelsize=10;1
-font-1 = Unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+font-1 = siji:pixelsize=10;1
 
 modules-center = date
 modules-right = i3
@@ -305,7 +303,7 @@ format-disconnected =
 type = internal/date
 interval = 0.5
 
-date = " %Y-%m-%d"
+date = "%Y-%m-%d"
 time = %H:%M:%S
 
 format-prefix = 
@@ -449,6 +447,12 @@ menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
+[module/playerctl]
+type = custom/script
+exec = player-status
+click-left = playerctl play-pause
+tail = true
+
 [settings]
 screenchange-reload = true
 ;compositing-background = xor
@@ -460,5 +464,6 @@ screenchange-reload = true
 [global/wm]
 margin-top = 5
 margin-bottom = 5
+
 
 ; vim:ft=dosini

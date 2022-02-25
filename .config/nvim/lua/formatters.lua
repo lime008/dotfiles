@@ -4,10 +4,6 @@ local prettier = function()
 		args = {
 			"--stdin-filepath",
 			vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-			"--single-quote",
-			"--use-tabs",
-			"--trailing-comma=all",
-			"--no-semi",
 		},
 		stdin = true,
 	}
@@ -83,7 +79,7 @@ require("formatter").setup({
 		markdown = { prettier },
 		html = { prettier },
 		svg = { prettierSvg },
-		go = { gofumpt, golines },
+		go = { gofumpt },
 		lua = { stylua },
 		terraform = { terraform },
 	},

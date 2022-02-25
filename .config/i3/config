@@ -5,7 +5,7 @@
 # this file and re-run i3-config-wizard(1).
 #
 #
-exec --no-startup-id picom &
+exec --no-startup-id "picom --experimental-backends &"
 
 # i3 config file (v4)
 #
@@ -201,6 +201,16 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
+}
+
+bindsym $mod+Shift+m mode "move_workspace"
+mode "move_workspace" {
+	bindsym l exec i3-msg move workspace to output right, mode "default"
+	bindsym h exec i3-msg move workspace to output left, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+	bindsym $mod+Shift+m mode "default"
 }
 
 bindsym $mod+0 mode "$mode_system"

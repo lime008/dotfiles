@@ -8,4 +8,5 @@ export GO111MODULE=on
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH=$PATH:$HOME/.linkerd2/bin
 export PATH=$PATH:$HOME/.yarn/bin
+export CLOUDSDK_PYTHON=/usr/bin/python2
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
