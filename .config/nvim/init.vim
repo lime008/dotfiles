@@ -67,7 +67,7 @@ set wrap            " enable soft line wrapping
 set cc=81           " set the text margin highlight
 
 " set the font
-set guifont=Fira\ Code\ 8
+set guifont=FiraCode\ Nerd\ Font\ 8
 
 " set list charracters
 set listchars=tab:►\ ,space:·,nbsp:⎵
@@ -144,12 +144,6 @@ let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
 let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-" ------------------------------------------------
-
-" UltiSnips settings -----------------------------
-let g:UltiSnipsListSnippets = "<c-tab>"
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
 " ------------------------------------------------
 
 " vim-go settings --------------------------------

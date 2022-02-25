@@ -9,6 +9,22 @@ local prettier = function()
 	}
 end
 
+local prettierSvg = function()
+	return {
+		exe = "prettier",
+		args = {
+			"--parser html",
+			"--stdin-filepath",
+			vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+			"--single-quote",
+			"--use-tabs",
+			"--trailing-comma=all",
+			"--no-semi",
+		},
+		stdin = true,
+	}
+end
+
 local gofumpt = function()
 	return {
 		exe = "gofumpt",
@@ -61,6 +77,8 @@ require("formatter").setup({
 		json = { prettier },
 		yaml = { prettier },
 		markdown = { prettier },
+		html = { prettier },
+		svg = { prettierSvg },
 		go = { gofumpt },
 		lua = { stylua },
 		terraform = { terraform },
@@ -71,7 +89,7 @@ vim.api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.js,*.json,*.ts,*.lua,*.md,*.go FormatWrite
+  autocmd BufWritePost *.js,*.jsx,*.json,*.ts,*.tsx,*.lua,*.md,*.go FormatWrite
 augroup END
 ]],
 	true
