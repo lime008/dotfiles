@@ -4,10 +4,6 @@ local prettier = function()
 		args = {
 			"--stdin-filepath",
 			vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-			"--single-quote",
-			"--use-tabs",
-			"--trailing-comma=all",
-			"--no-semi",
 		},
 		stdin = true,
 	}
@@ -56,14 +52,16 @@ local terraform = function()
 	}
 end
 
-
 require("formatter").setup({
 	filetype = {
 		javascript = { prettier },
+		javascriptreact = { prettier },
+		typescript = { prettier },
+		typescriptreact = { prettier },
 		json = { prettier },
 		yaml = { prettier },
 		markdown = { prettier },
-		go = { gofumpt, golines },
+		go = { gofumpt },
 		lua = { stylua },
 		terraform = { terraform },
 	},
