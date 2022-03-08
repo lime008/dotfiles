@@ -8,7 +8,8 @@
 lua require('plugins')
 
 " map the leader key to comma
-let mapleader=","
+let mapleader=" "
+nnoremap <SPACE><Nop>
 
 let g:pymode_virtalenv=0
 let g:pymode_init = 0
