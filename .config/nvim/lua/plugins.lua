@@ -31,6 +31,7 @@ return require("packer").startup(function(use)
 	use("nvim-lua/plenary.nvim")
 
 	-- LSP
+	use("williamboman/nvim-lsp-installer")
 	use("neovim/nvim-lspconfig")
 	use("mhartington/formatter.nvim") -- lsp formatter
 
@@ -68,5 +69,5 @@ return require("packer").startup(function(use)
 	use("yegappan/grep") -- quick grep in the current directory
 	use("sk1418/HowMuch") -- evaluate math formulas with visual selections
 	-- use 'knubie/vim-kitty-navigator' -- seemless navigation with the kitty terminal windows
-	use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install" }) -- markdown preview in browser
+	use({ "wjaelee/markdown-preview.nvim", run = "cd app && yarn install" }) -- markdown preview in browser
 end)

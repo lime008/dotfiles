@@ -3,7 +3,7 @@ local cmp = require("cmp")
 cmp.setup({
 	select = false,
 	confirmation = {
-		completeopt = "menu,menuone,noinsert,noselect",
+		completeopt = "menu,menuone,noinsert",
 	},
 	snippet = {
 		expand = function(args)

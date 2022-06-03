@@ -4,6 +4,18 @@ local ts = require("nvim-treesitter.configs")
 
 local servers = { "gopls", "tsserver", "cssls", "terraformls", "svelte", "pyright" }
 
+require("nvim-lsp-installer").setup({
+	ensure_installed = servers,
+	automatic_installation = true,
+	ui = {
+		icons = {
+			server_installed = "✓",
+			server_pending = "➜",
+			server_uninstalled = "✗",
+		},
+	},
+})
+
 local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
