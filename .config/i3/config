@@ -5,7 +5,7 @@
 # this file and re-run i3-config-wizard(1).
 #
 #
-exec --no-startup-id "picom --experimental-backends &"
+exec_always --no-startup-id "killall picom; picom --experimental-backends &"
 
 # i3 config file (v4)
 #
@@ -141,6 +141,7 @@ set $ws8 "8"
 set $ws9 "9"
 
 # switch to workspace
+workspace_auto_back_and_forth yes
 bindsym $mod+Control+l workspace next
 bindsym $mod+Control+h workspace prev
 bindsym $mod+1 workspace number $ws1
