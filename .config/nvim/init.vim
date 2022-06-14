@@ -110,7 +110,7 @@ func! SetKeyMappings()
 	nnoremap gr <cmd>lua vim.lsp.buf.references()<cr>
 	nnoremap gD <cmd>lua vim.lsp.buf.declaration()<cr>
 	nnoremap K <cmd>lua vim.lsp.buf.hover()<cr>
-	nnoremap <Leader>e <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>
+	nnoremap <Leader>e <cmd>lua vim.diagnostic.open_float()<cr>
 	nnoremap <Leader>rn <cmd>lua vim.lsp.buf.rename()<cr>
 	nnoremap <Leader>ca <cmd>lua vim.lsp.buf.code_action()<cr>
 	nnoremap <leader>lsr :LspRestart<cr>
