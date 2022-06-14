@@ -170,7 +170,7 @@ let Grep_Skip_Files = '*.log *.db'
 let Grep_Skip_Dirs = '.git node_modules .next'
 
 " Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noinsert
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
