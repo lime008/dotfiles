@@ -1,5 +1,8 @@
 #!/bin/bash
 i3-msg restart
 sleep 0.5
-notify-send -i display "Display profile changed to $AUTORANDR_CURRENT_PROFILE"
-xinput map-to-output $(xinput list --id-only "ELAN Touchscreen") eDP-1
+notify-send -i display "Display profile changed to ${AUTORANDR_CURRENT_PROFILE^}"
+
+if touch_screen=$(xinput list --id-only "ELAN Touchscreen"); then
+	xinput map-to-output $touch_screen eDP-1
+fi
