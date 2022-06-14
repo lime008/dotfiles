@@ -2,7 +2,7 @@ local nvim_lsp = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local ts = require("nvim-treesitter.configs")
 
-local servers = { "gopls", "tsserver", "cssls", "terraformls", "svelte", "pyright", "clangd" }
+local servers = { "gopls", "golangci_lint_ls", "tsserver", "cssls", "terraformls", "svelte", "pyright", "clangd" }
 
 require("nvim-lsp-installer").setup({
 	ensure_installed = servers,
