@@ -40,8 +40,14 @@ return require("packer").startup(function(use)
 	use("hrsh7th/nvim-cmp")
 	use("L3MON4D3/cmp_luasnip")
 
+	-- Github Copilot
+	-- use("github/copilot.vim")
+
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+
+	-- color highlight
+	use("norcalli/nvim-colorizer.lua")
 
 	-- purely visual
 	use("lime008/limetty-vim") -- Limetty colorscheme
@@ -66,5 +72,12 @@ return require("packer").startup(function(use)
 	use("yegappan/grep") -- quick grep in the current directory
 	use("sk1418/HowMuch") -- evaluate math formulas with visual selections
 	-- use 'knubie/vim-kitty-navigator' -- seemless navigation with the kitty terminal windows
-	use({ "wjaelee/markdown-preview.nvim", run = "cd app && yarn install" }) -- markdown preview in browser
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && npm install",
+		setup = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+		end,
+		ft = { "markdown" },
+	}) -- markdown preview in browser
 end)

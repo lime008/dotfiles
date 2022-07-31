@@ -2,8 +2,9 @@ local cmp = require("cmp")
 
 cmp.setup({
 	select = false,
+	preselect = cmp.PreselectMode.None,
 	confirmation = {
-		completeopt = "menu,menuone,noinsert",
+		completeopt = "menu,menuone,noinsert,noselect",
 	},
 	snippet = {
 		expand = function(args)
