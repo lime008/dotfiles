@@ -1,22 +1,20 @@
 /**
  * Limetty ROFI Color theme
  *
- * Authors
- *  Scheme: Miika Petäjäniemi (lime.b.cool@gmail.com), lime008 (https://github.com/lime00/limetty)
- *  Template: Jordi Pakey-Rodriguez (https://github.com/0xdec), Andrea Scarpino (https://github.com/ilpianista)
+ * Author: lime008 (https://github.com/lime00/limetty)
  */
 
 * {
-    red:                         rgba ( 224, 61, 61, 100 % );
-    blue:                        rgba ( 46, 194, 230, 100 % );
-    lightfg:                     rgba ( 243, 255, 181, 100 % );
-    lightbg:                     rgba ( 51, 48, 74, 100 % );
-    foreground:                  rgba ( 243, 255, 181, 100 % );
-    background:                  rgba ( 41, 38, 64, 100 % );
-    background-color:            rgba ( 41, 38, 64, 0 % );
-    separatorcolor:              @foreground;
-    border-color:                @foreground;
-    selected-normal-foreground:  @lightbg;
+    red:                         #e03d3d;
+    blue:                        #2ec2e6;
+    lightfg:                     #594671;
+    lightbg:                     #33304a;
+    foreground:                  #eeff96;
+    background:                  #292640;
+    background-color:            rgba ( 0, 0, 0, 0 % );
+    separatorcolor:              #7f7888;
+    border-color:                #594671;
+    selected-normal-foreground:  @foreground;
     selected-normal-background:  @lightfg;
     selected-active-foreground:  @background;
     selected-active-background:  @blue;
@@ -39,8 +37,10 @@
 }
 window {
     background-color: @background;
-    border:           1;
-    padding:          5;
+    border:           2;
+	border-radius:    4px;
+    padding:          10px;
+	width: calc(100% - 80px min 800px);
 }
 mainbox {
     border:           0;
@@ -52,8 +52,9 @@ message {
     padding:          1px ;
 }
 textbox {
-    text-color:       @foreground;
+    text-color:       inherit;
 }
+
 listview {
     fixed-height:     0;
     border:           2px dash 0px 0px ;
@@ -64,13 +65,19 @@ listview {
 }
 element {
     border:           0;
-    padding:          1px;
+    padding:          3px 5px;
 }
 element-text {
-	text-color: inherit;
+    text-color: inherit;
+	vertical-align: 0.5;
 }
 element-icon {
-margin: 0 10px 0 0;
+    size: 1.2em;
+    margin: 0 10px 0 0;
+	vertical-align: 0.5;
+}
+element.selected {
+	border-radius:    5px;
 }
 element.normal.normal {
     background-color: @normal-background;
@@ -109,11 +116,11 @@ element.alternate.active {
     text-color:       @alternate-active-foreground;
 }
 scrollbar {
-    width:            4px ;
+    width:            8px ;
     border:           0;
-    handle-color:     @normal-foreground;
+    handle-color:     #77c6a9;
     handle-width:     8px ;
-    padding:          0;
+    padding:          5 0 5 10px;
 }
 sidebar {
     border:           2px dash 0px 0px ;
@@ -143,11 +150,11 @@ entry {
 }
 prompt {
     spacing:          0;
-    text-color:       @normal-foreground;
+    text-color:       #d9ed00;
 }
 textbox-prompt-colon {
     expand:           false;
-    str:              ":";
-    margin:           0px 0.3000em 0.0000em 0.0000em ;
-    text-color:       inherit;
+    str:              ">";
+    margin:           0 0.3em 0 0.3em;
+    text-color:       #ee508a;
 }
