@@ -9,6 +9,7 @@ local servers = {
 	"cssls",
 	"terraformls",
 	"svelte",
+	"vuels",
 	"pyright",
 	"clangd",
 	"bashls",

@@ -70,6 +70,7 @@ end
 
 require("formatter").setup({
 	filetype = {
+		vue = { prettier },
 		javascript = { prettier },
 		javascriptreact = { prettier },
 		typescript = { prettier },
