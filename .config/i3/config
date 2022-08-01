@@ -72,6 +72,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec "rofi -combi-modi drun,run -show combi -show-icons"
 bindsym $mod+w exec "rofi -combi-modi window -show window"
 bindsym $mod+p exec "gopass ls --flat | rofi -i -matching fuzzy -p pass -dmenu | xargs --no-run-if-empty gopass show -c"
+bindsym $mod+Shift+d exec "autorandr --list | rofi -i -matching fuzzy -p pass -dmenu | xargs --no-run-if-empty autorandr "
 
 bindsym $mod+n exec "dunstctl history-pop"
 
