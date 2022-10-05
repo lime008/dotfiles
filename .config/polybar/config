@@ -103,7 +103,7 @@ font-0 = Noto Sans:fixed:pixelsize=10;1
 font-1 = siji:pixelsize=10;1
 
 modules-left = ewmh i3
-modules-center = date
+modules-center = date time
 
 ;tray-background = #0063ff
 
