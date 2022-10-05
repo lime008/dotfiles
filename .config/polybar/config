@@ -51,8 +51,8 @@ module-margin-right = 3
 
 font-0 = Noto Sans:fixed:pixelsize=10;2
 font-1 = siji:pixelsize=10;1
-font-2 = NotoSansMono Nerd Font:pixelsize=14;3
-font-3 = NotoSansMono Nerd Font:pixelsize=20;5
+font-2 = Symbols Nerd Font:pixelsize=14;3
+font-3 = Symbols Nerd Font:pixelsize=20;4
 
 modules-left =  ewmh i3 
 modules-center = date time
@@ -252,7 +252,7 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "   "
+format-prefix = "  "
 format-prefix-foreground = ${colors.foreground-alt}
 label = %percentage:2%%
 
@@ -269,7 +269,7 @@ interval = 0.5
 
 exec = "date +'%Y-%m-%d'"
 
-format-prefix = "%{O10}"
+format-prefix = "%{O5}"
 format-prefix-foreground = ${colors.foreground-alt}
 
 click-left = kitty --class=calendar-popup --hold cal -w3
@@ -280,7 +280,7 @@ interval = 0.5
 
 exec = "date +'%H:%M:%S'"
 
-format-prefix = "%{O10}"
+format-prefix = "%{O5}"
 format-prefix-foreground = ${colors.foreground-alt}
 
 click-left = kitty --hold cal -w3
@@ -347,9 +347,9 @@ adapter = ADP1
 full-at = 98
 low-at = 10
 
-format-charging = <ramp-capacity><label-charging>
-format-discharging = <ramp-capacity>  <label-discharging>
-format-low = <animation-low> <label-low>
+format-charging = <animation-charging><label-charging>
+format-discharging = <ramp-capacity><label-discharging>
+format-low = <animation-low><label-low>
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -438,19 +438,19 @@ wrapping-scroll = false
 pin-workspaces = false
 
 ; focused = Active workspace on focused monitor
-label-active = %{F#5af78e}%{T4}%{T-}%{F#000}%{O-8}%index%%{F-}
+label-active = %{F#5af78e}%{T4}%{T-}%{F#000}%{O-16}%index%%{F-}
 label-active-padding = 5px 
 
 ; unfocused = Inactive workspace on any monitor
-label-empty = %{F#00000000}%{T4}%{T-}%{F-}%{O-8}%index%%{F-}
+label-empty = %{F#00000000}%{T4}%{T-}%{F#fff}%{O-16}%index%%{F-}
 label-empty-padding = ${self.label-active-padding}
 
 ; visible = Active workspace on unfocused monitor
-label-occupied = %{F#33ffffff}%{T4}%{T-}%{F-}%{O-8}%index%%{F-}
+label-occupied = %{F#33ffffff}%{T4}%{T-}%{F#fff}%{O-16}%index%%{F-}
 label-occupied-padding = ${self.label-active-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %{F#ff5c57}%{T4}%{T-}%{F#000}%{O-8}%index%%{F-}
+label-urgent = %{F#ff5c57}%{T4}%{T-}%{F#000}%{O-16}%index%%{F-}
 label-urgent-padding = ${self.label-active-padding} 
 
 [settings]
