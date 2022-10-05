@@ -239,4 +239,5 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 for_window [class=".*"] border pixel 0
 for_window [class=".*"] title_format "<span size='medium'>%class  %title</span>"
 
-gaps inner 20
+gaps inner 10
+border_radius 2

@@ -2,6 +2,7 @@
 i3-msg restart
 sleep 0.5
 notify-send -i display "Display profile changed to ${AUTORANDR_CURRENT_PROFILE^}"
+nitrogen --restore
 
 if touch_screen=$(xinput list --id-only "ELAN Touchscreen"); then
 	xinput map-to-output $touch_screen eDP-1

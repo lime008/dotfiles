@@ -53,9 +53,9 @@ module-margin-right = 2
 font-0 = Noto Sans:fixed:pixelsize=10;1
 font-1 = siji:pixelsize=10;1
 
-modules-left = powermenu filesystem xkeyboard memory cpy wlan eth temperature battery
+modules-left =  ewmh i3 filesystem xkeyboard memory cpy wlan eth temperature battery
 modules-center = date
-modules-right = i3
+modules-right = pulseaudio powermenu 
 
 tray-position = right
 tray-padding = 1
@@ -101,8 +101,8 @@ module-margin-right = 2
 font-0 = Noto Sans:fixed:pixelsize=10;1
 font-1 = siji:pixelsize=10;1
 
+modules-left = ewmh i3
 modules-center = date
-modules-right = i3
 
 ;tray-background = #0063ff
 
@@ -300,16 +300,14 @@ format-disconnected =
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
-type = internal/date
+type = custom/script
 interval = 0.5
 
-date = "%Y-%m-%d"
-time = %H:%M:%S
+exec = "date +'%d.%m.%Y %H:%M:%S'"
 
-format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 
-label = %date% %time%
+click-left = kitty --hold cal -w3
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -452,6 +450,42 @@ type = custom/script
 exec = player-status
 click-left = playerctl play-pause
 tail = true
+
+[module/ewmh]
+type = internal/xworkspaces
+
+format = <label-state>
+
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = false
+
+label-mode-padding = 6
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-active = %index%
+label-active-background = ${colors.background-alt}
+label-active-underline= ${colors.primary}
+label-active-padding = 6
+
+; unfocused = Inactive workspace on any monitor
+label-empty = %index%
+label-empty-padding = 6
+
+; visible = Active workspace on unfocused monitor
+label-occupied = %index%
+label-occupied-background = ${self.label-active-background}
+label-occupied-underline = ${colors.secondary}
+label-occupied-padding = ${self.label-active-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 6
 
 [settings]
 screenchange-reload = true
