@@ -39,23 +39,24 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 
 line-size = 3
-line-color = #f00
 
 border-size = 0
 border-color = #00000000
 
 padding-left = 0
-padding-right = 2
+padding-right = 0
 
 module-margin-left = 1
-module-margin-right = 2
+module-margin-right = 3
 
-font-0 = Noto Sans:fixed:pixelsize=10;1
+font-0 = Noto Sans:fixed:pixelsize=10;2
 font-1 = siji:pixelsize=10;1
+font-2 = Symbols Nerd Font:pixelsize=14;3
+font-3 = Symbols Nerd Font:pixelsize=20;4
 
-modules-left = powermenu filesystem xkeyboard memory cpy wlan eth temperature battery
-modules-center = date
-modules-right = i3
+modules-left =  ewmh i3 
+modules-center = date time
+modules-right = filesystem xkeyboard memory cpu temperature battery powermenu 
 
 tray-position = right
 tray-padding = 1
@@ -101,8 +102,8 @@ module-margin-right = 2
 font-0 = Noto Sans:fixed:pixelsize=10;1
 font-1 = siji:pixelsize=10;1
 
-modules-center = date
-modules-right = i3
+modules-left = ewmh i3
+modules-center = date time
 
 ;tray-background = #0063ff
 
@@ -128,12 +129,10 @@ label = %title:0:30:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
+format-prefix = "   "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
@@ -146,7 +145,12 @@ interval = 25
 
 mount-0 = /
 
-label-mounted = %{F#57c7ff}%mountpoint%%{F-}: %percentage_used%%
+format-mounted-prefix = "  "
+format-mounted-prefix-foreground = ${colors.foreground-alt}
+format-unmounted-prefix = "  "
+format-unmounted-prefix-foreground = ${colors.foreground-alt}
+
+label-mounted = %mountpoint% %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -248,68 +252,38 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = "  "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
 label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = "﬙  "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
 label = %percentage_used%%
 
-[module/wlan]
-type = internal/network
-interface = net1
-interval = 3.0
-
-format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
-label-connected = %essid%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
-
-[module/eth]
-type = internal/network
-interface = eno1
-interval = 3.0
-
-format-connected-underline = #55aa55
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
 [module/date]
-type = internal/date
+type = custom/script
 interval = 0.5
 
-date = "%Y-%m-%d"
-time = %H:%M:%S
+exec = "date +'%Y-%m-%d'"
 
-format-prefix = 
+format-prefix = "%{O5}"
 format-prefix-foreground = ${colors.foreground-alt}
 
-label = %date% %time%
+click-left = kitty --class=calendar-popup --hold cal -w3
+
+[module/time]
+type = custom/script
+interval = 0.5
+
+exec = "date +'%H:%M:%S'"
+
+format-prefix = "%{O5}"
+format-prefix-foreground = ${colors.foreground-alt}
+
+click-left = kitty --hold cal -w3
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -371,64 +345,63 @@ type = internal/battery
 battery = BAT0
 adapter = ADP1
 full-at = 98
+low-at = 10
 
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #f5a70a
+format-charging = <animation-charging><label-charging>
+format-discharging = <ramp-capacity><label-discharging>
+format-low = <animation-low><label-low>
 
-format-discharging = <animation-discharging> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
-
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-font = 3
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-5 = 
 animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
 
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
-animation-discharging-framerate = 750
+animation-low-0 = 
+animation-low-1 = 
+animation-low-foreground = ${colors.alert}
+animation-low-framerate = 750
 
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
-warn-temperature = 60
+base-temperature = 20
+warn-temperature = 70
 
 format = <ramp> <label>
-format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
 
 label = %temperature-c%
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
+label-warn-foreground = ${colors.alert}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
 ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]
 type = custom/menu
 
-expand-right = true
+expand-right = false
 
 format-spacing = 1
 
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
+label-open = "襤 "
+label-open-foreground = ${colors.foreground}
+label-close = " cancel "
+label-close-background = ${colors.alert}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
@@ -452,6 +425,33 @@ type = custom/script
 exec = player-status
 click-left = playerctl play-pause
 tail = true
+
+[module/ewmh]
+type = internal/xworkspaces
+
+format = <label-state>  |  <label-monitor>
+
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = false
+
+; focused = Active workspace on focused monitor
+label-active = %{F#5af78e}%{T4}%{T-}%{F#000}%{O-16}%index%%{F-}
+label-active-padding = 5px 
+
+; unfocused = Inactive workspace on any monitor
+label-empty = %{F#00000000}%{T4}%{T-}%{F#fff}%{O-16}%index%%{F-}
+label-empty-padding = ${self.label-active-padding}
+
+; visible = Active workspace on unfocused monitor
+label-occupied = %{F#33ffffff}%{T4}%{T-}%{F#fff}%{O-16}%index%%{F-}
+label-occupied-padding = ${self.label-active-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %{F#ff5c57}%{T4}%{T-}%{F#000}%{O-16}%index%%{F-}
+label-urgent-padding = ${self.label-active-padding} 
 
 [settings]
 screenchange-reload = true

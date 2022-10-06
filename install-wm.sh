@@ -21,7 +21,8 @@ gopass-jsonapi \
 neovim \
 stylua \
 go \
-ripgrep"
+ripgrep \
+ttf-nerd-fonts-symbols-1000-em"
 
 sudo pacman -Sy $PKGS
 

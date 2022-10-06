@@ -80,7 +80,7 @@ require("formatter").setup({
 		markdown = { prettier },
 		html = { prettier },
 		svg = { prettierSvg },
-		go = { gofumpt },
+		go = { gofumpt, golines },
 		lua = { stylua },
 		terraform = { terraform },
 	},
