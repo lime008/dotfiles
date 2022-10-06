@@ -1,8 +1,12 @@
 #!/bin/bash
-i3-msg restart
+
+# i3-msg restart
+herbstclient detect_monitors
+
 sleep 0.5
-notify-send -i display "Display profile changed to ${AUTORANDR_CURRENT_PROFILE^}"
 nitrogen --restore
+$HOME/.config/polybar/launch.sh
+notify-send -i display "Display profile changed to ${AUTORANDR_CURRENT_PROFILE^}"
 
 if touch_screen=$(xinput list --id-only "ELAN Touchscreen"); then
 	xinput map-to-output $touch_screen eDP-1
