@@ -1,0 +1,1 @@
+maim -s ~/Pictures/screenshot-$(date +%s).png

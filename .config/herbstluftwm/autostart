@@ -11,10 +11,10 @@ hc emit_hook reload
 # Applets
 killall -q pa-applet
 killall -q nm-applet
-pa-applet &
+pa-applet --disable-key-grabbing --disable-notifications &
 nm-applet &
 
-export TERMINAL=kitty
+TERMINAL=kitty
 
 nitrogen --restore
 
@@ -42,6 +42,16 @@ hc keybind $Mod-d spawn rofi -combi-modi drun,run -show combi -show-icons &
 hc keybind $Mod-w spawn rofi -combi-modi window -show window &
 hc keybind $Mod-p spawn ~/.config/herbstluftwm/gopass
 hc keybind $Mod-Shift-w spawn ~/.config/herbstluftwm/autorandr
+hc keybind Print spawn ~/.config/herbstluftwm/screenshot
+hc keybind Control-Print spawn peek & 
+
+# Player controls
+ac=~/.config/herbstluftwm/audio-control
+hc keybind XF86AudioRaiseVolume spawn $ac VOLUME_UP
+hc keybind XF86AudioLowerVolume spawn $ac VOLUME_DOWN
+hc keybind XF86AudioMute spawn $ac MUTE
+hc keybind Pause spawn $ac MIC_MUTE
+
 
 # basic movement in tiling and floating mode
 # focusing clients
@@ -163,6 +173,7 @@ hc attr theme.border_width 2
 hc attr theme.floating.border_width 4
 hc attr theme.floating.outer_width 1
 hc attr theme.floating.outer_color black
+hc attr theme.floating.title_when always
 hc attr theme.active.inner_color '#789161'
 hc attr theme.urgent.inner_color '#9A65B0'
 hc attr theme.normal.inner_color '#606060'
