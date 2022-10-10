@@ -42,6 +42,7 @@ hc keybind $Mod-d spawn rofi -combi-modi drun,run -show combi -show-icons &
 hc keybind $Mod-w spawn rofi -combi-modi window -show window &
 hc keybind $Mod-p spawn ~/.config/herbstluftwm/gopass
 hc keybind $Mod-Shift-w spawn ~/.config/herbstluftwm/autorandr
+hc keybind $Mod-0 spawn ~/.config/herbstluftwm/wm-lock
 hc keybind Print spawn ~/.config/herbstluftwm/screenshot
 hc keybind Control-Print spawn peek & 
 

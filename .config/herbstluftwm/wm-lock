@@ -1,0 +1,11 @@
+#!/bin/bash
+
+command=$(printf "lock\nsuspend\nlogout\nshutdown\nrestart" | rofi -i -dmenu)
+
+echo $command
+
+case $command in
+	lock)
+		i3exit lock
+	;;
+esac
