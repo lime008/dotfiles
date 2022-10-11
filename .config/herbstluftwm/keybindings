@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+
+hc() {
+    herbstclient "$@"
+}
+
+kb() {
+    hc keybind "$@"
+}
+
+Mod=Mod1    # Use alt as the main modifier
+
+# mouse
+herbstclient mouseunbind --all
+hc mousebind $Mod-Button1 move
+hc mousebind $Mod-Button2 zoom
+hc mousebind $Mod-Button3 resize
+
+# remove all existing keybindings
+hc keyunbind --all
+
+kb $Mod-Shift-q close
+kb $Mod-Shift-r reload
+kb $Mod-Shift-c close
+kb $Mod-Return spawn "${TERMINAL:-xterm}" # use your $TERMINAL with xterm as fallback
+
+# Rofi
+kb $Mod-d spawn rofi -combi-modi drun,run -show combi -show-icons &
+kb $Mod-w spawn rofi -combi-modi window -show window &
+kb $Mod-p spawn ~/.config/herbstluftwm/gopass
+kb $Mod-Shift-w spawn ~/.config/herbstluftwm/autorandr
+kb $Mod-0 spawn ~/.config/herbstluftwm/wm-lock
+kb Print spawn ~/.config/herbstluftwm/screenshot
+kb Control-Print spawn peek & 
+
+# Player controls
+ac=~/.config/herbstluftwm/audio-control
+kb XF86AudioRaiseVolume spawn $ac VOLUME_UP
+kb XF86AudioLowerVolume spawn $ac VOLUME_DOWN
+kb XF86AudioMute spawn $ac MUTE
+kb Pause spawn $ac MIC_MUTE
+
+# basic movement in tiling and floating mode
+# focusing clients
+kb $Mod-Left  focus left
+kb $Mod-Down  focus down
+kb $Mod-Up    focus up
+kb $Mod-Right focus right
+kb $Mod-h     focus left
+kb $Mod-j     focus down
+kb $Mod-k     focus up
+kb $Mod-l     focus right
+
+# moving clients in tiling and floating mode
+kb $Mod-Shift-Left  shift left
+kb $Mod-Shift-Down  shift down
+kb $Mod-Shift-Up    shift up
+kb $Mod-Shift-Right shift right
+kb $Mod-Shift-h     shift left
+kb $Mod-Shift-j     shift down
+kb $Mod-Shift-k     shift up
+kb $Mod-Shift-l     shift right
+
+# splitting frames
+# create an empty frame at the specified direction
+kb $Mod-u       split   bottom  0.5
+kb $Mod-i       split   right   0.5
+# let the current frame explode into subframes
+kb $Mod-Shift-e split explode
+
+# resizing frames and floating clients
+resizestep=0.02
+kb $Mod-Control-h       resize left +$resizestep
+kb $Mod-Control-j       resize down +$resizestep
+kb $Mod-Control-k       resize up +$resizestep
+kb $Mod-Control-l       resize right +$resizestep
+kb $Mod-Control-Left    resize left +$resizestep
+kb $Mod-Control-Down    resize down +$resizestep
+kb $Mod-Control-Up      resize up +$resizestep
+kb $Mod-Control-Right   resize right +$resizestep
+
+# tags
+tag_names=( {1..9} )
+tag_keys=( {1..9} )
+
+hc rename default "${tag_names[0]}" || true
+for i in "${!tag_names[@]}" ; do
+    hc add "${tag_names[$i]}"
+    key="${tag_keys[$i]}"
+    if [ -n "$key" ] ; then
+        kb "$Mod-$key" use_index "$i"
+        kb "$Mod-Shift-$key" move_index "$i"
+    fi
+done
+
+# cycle through tags
+kb $Mod-o use_index +1 --skip-visible
+kb $Mod-y  use_index -1 --skip-visible
+
+# layouting
+kb $Mod-r remove
+kb $Mod-s floating toggle
+kb $Mod-f fullscreen toggle
+kb $Mod-Shift-f set_attr clients.focus.floating toggle
+kb $Mod-Shift-d set_attr clients.focus.decorated toggle
+kb $Mod-Shift-m set_attr clients.focus.minimized true
+kb $Mod-Control-m jumpto last-minimized
+kb $Mod-Shift-p pseudotile toggle
+
+# The following cycles through the available layouts within a frame, but skips
+# layouts, if the layout change wouldn't affect the actual window positions.
+# I.e. if there are two windows within a frame, the grid layout is skipped.
+kb $Mod-e                                                           \
+            or , and . compare tags.focus.curframe_wcount = 2                   \
+                     . cycle_layout +1 vertical horizontal max vertical grid    \
+               , cycle_layout +1
+
+# focus
+kb $Mod-BackSpace   cycle_monitor
+kb $Mod-Tab         cycle_all +1
+kb $Mod-Shift-Tab   cycle_all -1
+kb $Mod-c cycle
+kb $Mod-n jumpto urgent

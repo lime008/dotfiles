@@ -14,8 +14,6 @@ killall -q nm-applet
 pa-applet --disable-key-grabbing --disable-notifications &
 nm-applet &
 
-TERMINAL=kitty
-
 nitrogen --restore
 
 # Additional software
@@ -24,122 +22,9 @@ xset r rate 300 80 &
 
 xsetroot -solid '#5A8E3A'
 
-# remove all existing keybindings
-hc keyunbind --all
+export TERMINAL=kitty
 
-# keybindings
-# if you have a super key you will be much happier with Mod set to Mod4
-Mod=Mod1    # Use alt as the main modifier
-#Mod=Mod4   # Use the super key as the main modifier
-
-hc keybind $Mod-Shift-q close
-hc keybind $Mod-Shift-r reload
-hc keybind $Mod-Shift-c close
-hc keybind $Mod-Return spawn "${TERMINAL:-xterm}" # use your $TERMINAL with xterm as fallback
-
-# Rofi
-hc keybind $Mod-d spawn rofi -combi-modi drun,run -show combi -show-icons &
-hc keybind $Mod-w spawn rofi -combi-modi window -show window &
-hc keybind $Mod-p spawn ~/.config/herbstluftwm/gopass
-hc keybind $Mod-Shift-w spawn ~/.config/herbstluftwm/autorandr
-hc keybind $Mod-0 spawn ~/.config/herbstluftwm/wm-lock
-hc keybind Print spawn ~/.config/herbstluftwm/screenshot
-hc keybind Control-Print spawn peek & 
-
-# Player controls
-ac=~/.config/herbstluftwm/audio-control
-hc keybind XF86AudioRaiseVolume spawn $ac VOLUME_UP
-hc keybind XF86AudioLowerVolume spawn $ac VOLUME_DOWN
-hc keybind XF86AudioMute spawn $ac MUTE
-hc keybind Pause spawn $ac MIC_MUTE
-
-
-# basic movement in tiling and floating mode
-# focusing clients
-hc keybind $Mod-Left  focus left
-hc keybind $Mod-Down  focus down
-hc keybind $Mod-Up    focus up
-hc keybind $Mod-Right focus right
-hc keybind $Mod-h     focus left
-hc keybind $Mod-j     focus down
-hc keybind $Mod-k     focus up
-hc keybind $Mod-l     focus right
-
-# moving clients in tiling and floating mode
-hc keybind $Mod-Shift-Left  shift left
-hc keybind $Mod-Shift-Down  shift down
-hc keybind $Mod-Shift-Up    shift up
-hc keybind $Mod-Shift-Right shift right
-hc keybind $Mod-Shift-h     shift left
-hc keybind $Mod-Shift-j     shift down
-hc keybind $Mod-Shift-k     shift up
-hc keybind $Mod-Shift-l     shift right
-
-# splitting frames
-# create an empty frame at the specified direction
-hc keybind $Mod-u       split   bottom  0.5
-hc keybind $Mod-i       split   right   0.5
-# let the current frame explode into subframes
-hc keybind $Mod-Control-space split explode
-
-# resizing frames and floating clients
-resizestep=0.02
-hc keybind $Mod-Control-h       resize left +$resizestep
-hc keybind $Mod-Control-j       resize down +$resizestep
-hc keybind $Mod-Control-k       resize up +$resizestep
-hc keybind $Mod-Control-l       resize right +$resizestep
-hc keybind $Mod-Control-Left    resize left +$resizestep
-hc keybind $Mod-Control-Down    resize down +$resizestep
-hc keybind $Mod-Control-Up      resize up +$resizestep
-hc keybind $Mod-Control-Right   resize right +$resizestep
-
-# tags
-tag_names=( {1..9} )
-tag_keys=( {1..9} 0 )
-
-hc rename default "${tag_names[0]}" || true
-for i in "${!tag_names[@]}" ; do
-    hc add "${tag_names[$i]}"
-    key="${tag_keys[$i]}"
-    if [ -n "$key" ] ; then
-        hc keybind "$Mod-$key" use_index "$i"
-        hc keybind "$Mod-Shift-$key" move_index "$i"
-    fi
-done
-
-# cycle through tags
-hc keybind $Mod-o use_index +1 --skip-visible
-hc keybind $Mod-y  use_index -1 --skip-visible
-
-# layouting
-hc keybind $Mod-r remove
-hc keybind $Mod-s floating toggle
-hc keybind $Mod-f fullscreen toggle
-hc keybind $Mod-Shift-f set_attr clients.focus.floating toggle
-hc keybind $Mod-Shift-d set_attr clients.focus.decorated toggle
-hc keybind $Mod-Shift-m set_attr clients.focus.minimized true
-hc keybind $Mod-Control-m jumpto last-minimized
-hc keybind $Mod-Shift-p pseudotile toggle
-# The following cycles through the available layouts within a frame, but skips
-# layouts, if the layout change wouldn't affect the actual window positions.
-# I.e. if there are two windows within a frame, the grid layout is skipped.
-hc keybind $Mod-space                                                           \
-            or , and . compare tags.focus.curframe_wcount = 2                   \
-                     . cycle_layout +1 vertical horizontal max vertical grid    \
-               , cycle_layout +1
-
-# mouse
-hc mouseunbind --all
-hc mousebind $Mod-Button1 move
-hc mousebind $Mod-Button2 zoom
-hc mousebind $Mod-Button3 resize
-
-# focus
-hc keybind $Mod-BackSpace   cycle_monitor
-hc keybind $Mod-Tab         cycle_all +1
-hc keybind $Mod-Shift-Tab   cycle_all -1
-hc keybind $Mod-c cycle
-hc keybind $Mod-n jumpto urgent
+$HOME/.config/herbstluftwm/keybindings
 
 # theme
 hc attr theme.tiling.reset 1
@@ -187,14 +72,17 @@ done
 hc attr theme.tiling.outer_width 1
 hc attr theme.background_color '#141414'
 
-hc set window_gap 10 
-hc set frame_padding 0 
+hc set window_gap 5
+hc set frame_gap  10
+hc set frame_padding 0
 hc set smart_window_surroundings off
-hc set smart_frame_surroundings off
+hc set smart_frame_surroundings on
 hc set mouse_recenter_gap 1
+hc set show_frame_decorations if_empty
 
 # rules
 hc unrule -F
+hc rule index=e # place new clients on empty frames if possible
 #hc rule class=XTerm tag=3 # move all xterms to tag 3
 hc rule focus=on # normally focus new clients
 hc rule floatplacement=smart
