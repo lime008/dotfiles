@@ -1,11 +1,31 @@
 #!/bin/bash
 
-command=$(printf "lock\nsuspend\nlogout\nshutdown\nrestart" | rofi -i -dmenu)
+read -r -d '' opts <<EOF
+·   	Lock
+·   ⏾	Suspend
+·   	Exit
+·   ⏻	Power off
+·   	Restart
+EOF
+
+command=$(echo "$opts" | rofi -dmenu -i -p "Power menu" -format i -matching prefix -columns 2)
 
 echo $command
 
 case $command in
-	lock)
+	0)
 		i3exit lock
+	;;
+	1)
+		i3exit suspend
+	;;
+	2)
+		i3exit logout
+	;;
+	3)
+		i3exit shutdown
+	;;
+	4)
+		i3exit reboot
 	;;
 esac
