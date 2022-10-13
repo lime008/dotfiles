@@ -20,6 +20,8 @@ nitrogen --restore
 picom --experimental-backends &
 xset r rate 300 80 &
 
+autorandr -c &
+
 xsetroot -solid '#5A8E3A'
 
 export TERMINAL=kitty

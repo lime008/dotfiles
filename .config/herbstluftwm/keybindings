@@ -74,10 +74,6 @@ kb $Mod-Control-h       resize left +$resizestep
 kb $Mod-Control-j       resize down +$resizestep
 kb $Mod-Control-k       resize up +$resizestep
 kb $Mod-Control-l       resize right +$resizestep
-kb $Mod-Control-Left    resize left +$resizestep
-kb $Mod-Control-Down    resize down +$resizestep
-kb $Mod-Control-Up      resize up +$resizestep
-kb $Mod-Control-Right   resize right +$resizestep
 
 # tags
 tag_names=( {1..9} )
@@ -112,8 +108,8 @@ kb $Mod-Shift-p pseudotile toggle
 kb $Mod-w set_layout max
 kb $Mod-e                                                        \
             or , and . compare tags.focus.curframe_wcount = 2    \
-                     . cycle_layout +1 vertical horizontal       \
-               , cycle_layout +1 vertical horizontal grid
+                     . cycle_layout +1 horizontal vertical       \
+               , cycle_layout +1 horizontal vertical grid
 
 # focus
 kb $Mod-BackSpace   cycle_monitor
