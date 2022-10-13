@@ -26,9 +26,9 @@ kb $Mod-Return spawn "${TERMINAL:-xterm}" # use your $TERMINAL with xterm as fal
 
 # Rofi
 kb $Mod-d spawn rofi -combi-modi drun,run -show combi -show-icons &
-kb $Mod-w spawn rofi -combi-modi window -show window &
+kb $Mod-Shift-w spawn rofi -combi-modi window -show window &
 kb $Mod-p spawn ~/.config/herbstluftwm/gopass
-kb $Mod-Shift-w spawn ~/.config/herbstluftwm/autorandr
+kb $Mod-Shift-d spawn ~/.config/herbstluftwm/autorandr
 kb $Mod-0 spawn ~/.config/herbstluftwm/wm-lock
 kb Print spawn ~/.config/herbstluftwm/screenshot
 kb Control-Print spawn peek & 
@@ -98,7 +98,6 @@ kb $Mod-r remove
 kb $Mod-s floating toggle
 kb $Mod-f fullscreen toggle
 kb $Mod-Shift-f set_attr clients.focus.floating toggle
-kb $Mod-Shift-d set_attr clients.focus.decorated toggle
 kb $Mod-Shift-m set_attr clients.focus.minimized true
 kb $Mod-Control-m jumpto last-minimized
 kb $Mod-Shift-p pseudotile toggle
@@ -106,10 +105,11 @@ kb $Mod-Shift-p pseudotile toggle
 # The following cycles through the available layouts within a frame, but skips
 # layouts, if the layout change wouldn't affect the actual window positions.
 # I.e. if there are two windows within a frame, the grid layout is skipped.
-kb $Mod-e \
-	or , and . compare tags.focus.curframe_wcount = 2 \
-    	. cycle_layout +1 vertical horizontal max vertical grid \
-	, cycle_layout +1
+kb $Mod-w set_layout max
+kb $Mod-e                                                        \
+            or , and . compare tags.focus.curframe_wcount = 2    \
+                     . cycle_layout +1 horizontal vertical       \
+               , cycle_layout +1 horizontal vertical grid
 
 # focus
 kb $Mod-BackSpace   cycle_monitor
