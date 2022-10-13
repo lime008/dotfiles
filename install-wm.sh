@@ -14,6 +14,7 @@ kitty \
 viu \
 bat \
 peek \
+slop \
 maim \
 autorandr \
 gopass \
@@ -35,6 +36,11 @@ DOTFILES="$HOME/.dotfiles"
 git clone --bare $REPO $DOTFILES ||(git --git-dir="$DOTFILES" --work-tree="$HOME" pull)
 git --git-dir=$HOME/.dotfiles config --local status.showUntrackedFiles no
 git config --global alias.dotf '!git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+
+# zsh
+[[ -f $HOME/Git/zsh-snap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git $HOME/.config/zsnap/zsh-snap
 
 # Install packer for neovim
 PACKER_INSTALL_DIR=~/.local/share/nvim/site/pack/packer/start/packer.nvim
