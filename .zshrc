@@ -1,3 +1,5 @@
+source ~/.config/zsh/zsh-snap/znap.zsh
+
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle :compinstall filename '$HOME/.zshrc'
 
