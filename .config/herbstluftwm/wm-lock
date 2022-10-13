@@ -20,7 +20,7 @@ case $command in
 		i3exit suspend
 	;;
 	2)
-		i3exit logout
+		herbstclient quit
 	;;
 	3)
 		i3exit shutdown

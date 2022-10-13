@@ -74,10 +74,6 @@ kb $Mod-Control-h       resize left +$resizestep
 kb $Mod-Control-j       resize down +$resizestep
 kb $Mod-Control-k       resize up +$resizestep
 kb $Mod-Control-l       resize right +$resizestep
-kb $Mod-Control-Left    resize left +$resizestep
-kb $Mod-Control-Down    resize down +$resizestep
-kb $Mod-Control-Up      resize up +$resizestep
-kb $Mod-Control-Right   resize right +$resizestep
 
 # tags
 tag_names=( {1..9} )
@@ -110,10 +106,10 @@ kb $Mod-Shift-p pseudotile toggle
 # The following cycles through the available layouts within a frame, but skips
 # layouts, if the layout change wouldn't affect the actual window positions.
 # I.e. if there are two windows within a frame, the grid layout is skipped.
-kb $Mod-e                                                           \
-            or , and . compare tags.focus.curframe_wcount = 2                   \
-                     . cycle_layout +1 vertical horizontal max vertical grid    \
-               , cycle_layout +1
+kb $Mod-e \
+	or , and . compare tags.focus.curframe_wcount = 2 \
+    	. cycle_layout +1 vertical horizontal max vertical grid \
+	, cycle_layout +1
 
 # focus
 kb $Mod-BackSpace   cycle_monitor
