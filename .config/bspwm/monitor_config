@@ -1,0 +1,31 @@
+#!/bin/bash
+
+MONITORS=$(xrandr --listactivemonitors | tail -n+2)
+PRIMARY=$(awk '$2 ~ /^\+\*/ {print $4}' <<< "$MONITORS")
+ACTIVE_MONITORS=($(awk '{print $4}' <<< "$MONITORS"))
+
+NUM_ACTIVE=${#ACTIVE_MONITORS[@]}
+NUM_WS=9
+WPS=$(($NUM_WS / $NUM_ACTIVE))
+MOD=$(($NUM_WS % $NUM_ACTIVE))
+
+i=0
+m=0
+while ((i < ${NUM_WS})); do
+	MON="${ACTIVE_MONITORS[m]}"
+
+	if [[ "$MON" == "$PRIMARY" ]]; then
+		WP=$(seq $(($i + 1)) $(($WPS + $MOD + $i)))
+		i=$(($WPS + $MOD + $i))
+	else
+		WP=$(seq $(($i + 1)) $(($WPS + $i)))
+		i=$(($WPS + $i))
+	fi
+
+	echo $MON ${WP}
+
+	bspc monitor $MON -d ${WP}
+	m=$(($m + 1))
+done
+
+echo $x

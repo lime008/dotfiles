@@ -27,14 +27,14 @@ kb $Mod-Return spawn "${TERMINAL:-xterm}" # use your $TERMINAL with xterm as fal
 # Rofi
 kb $Mod-d spawn rofi -combi-modi drun,run -show combi -show-icons &
 kb $Mod-Shift-w spawn rofi -combi-modi window -show window &
-kb $Mod-p spawn ~/.config/herbstluftwm/gopass
-kb $Mod-Shift-d spawn ~/.config/herbstluftwm/autorandr
-kb $Mod-0 spawn ~/.config/herbstluftwm/wm-lock
-kb Print spawn ~/.config/herbstluftwm/screenshot
+kb $Mod-p spawn ~/.config/wm-scripts/gopass
+kb $Mod-Shift-d spawn ~/.config/wm-scripts/autorandr
+kb $Mod-0 spawn ~/.config/wm-scripts/wm-lock
+kb Print spawn ~/.config/wm-scripts/screenshot
 kb Control-Print spawn peek & 
 
 # Player controls
-ac=~/.config/herbstluftwm/audio-control
+ac=~/.config/wm-scripts/audio-control
 kb XF86AudioRaiseVolume spawn $ac VOLUME_UP
 kb XF86AudioLowerVolume spawn $ac VOLUME_DOWN
 kb XF86AudioMute spawn $ac MUTE

@@ -1,7 +1,16 @@
 #!/bin/bash
 
-# i3-msg restart
-herbstclient detect_monitors
+case $XDG_SESSION_DESKTOP in
+	i3)
+		i3-msg restart
+		;;
+	herbstluftwm)
+		herbstclient detect_monitors
+		;;
+	bspwm)
+		$HOME/.config/bspwm/monitor_config
+		;;
+esac
 
 sleep 0.5
 nitrogen --restore

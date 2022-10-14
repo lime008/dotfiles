@@ -1,0 +1,37 @@
+#! /bin/sh
+
+logfile=/tmp/bspwm_external_rules.log
+window_id="$1"
+window_class="$2"
+window_instance="$3"
+window_title="$(xwininfo -id "$window_id" | sed '/^xwininfo/!d ; s,.*"\(.*\)".*,\1,')"
+window_type="$(xprop -id "$window_id" _NET_WM_WINDOW_TYPE | sed '/^_NET_WM_WINDOW_TYPE/!d ; s/^.* = \(.*\),.*/\1/')"
+
+case "$window_type" in
+	*DIALOG*)
+		echo "state=floating"
+		;;
+	*UTILITY*)
+		echo "state=floating"
+		;;
+	*SPLASH*)
+		echo "state=floating"
+		echo "center=on"
+		;;
+	*NOTIFICATION*)
+		echo "manage=off"
+		;;
+	*DOCK*)
+		echo "manage=off"
+		;;
+	*DESKTOP*)
+		echo "manage=off"
+		;;
+esac
+
+echo "Id: $window_id" >> "$logfile"
+echo "Class: $window_class" >> "$logfile"
+echo "Instance: $window_instance" >> "$logfile"
+echo "Title: $window_title" >> "$logfile"
+echo "Type: $window_type" >> "$logfile"
+echo "---" >> "$logfile"
