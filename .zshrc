@@ -1,10 +1,8 @@
-source ~/.config/zsh/zsh-snap/znap.zsh
-
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle :compinstall filename '$HOME/.zshrc'
 
 source $HOME/.config/zsh/shrink-path.zsh
-source $HOME/.config/znap/zsh-snap/znap.zsh
+source $HOME/.config/zsh/zsh-snap/znap.zsh
 
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-completions
