@@ -28,9 +28,12 @@ return require("packer").startup(function(use)
 	use("nvim-lua/plenary.nvim")
 
 	-- LSP
-	use("williamboman/nvim-lsp-installer")
-	use("neovim/nvim-lspconfig")
-	use("mhartington/formatter.nvim") -- lsp formatter
+	use({
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+	})
+	use("jose-elias-alvarez/null-ls.nvim") -- lsp formatter
 
 	-- completions with cmp
 	use("hrsh7th/cmp-nvim-lsp")

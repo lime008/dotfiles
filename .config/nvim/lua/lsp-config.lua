@@ -15,18 +15,12 @@ local servers = {
 	"bashls",
 	"yamlls",
 	"dockerls",
+	"rust_analyzer",
 }
 
-require("nvim-lsp-installer").setup({
-	ensure_installed = servers,
+require("mason").setup()
+require("mason-lspconfig").setup({
 	automatic_installation = true,
-	ui = {
-		icons = {
-			server_installed = "✓",
-			server_pending = "➜",
-			server_uninstalled = "✗",
-		},
-	},
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
