@@ -81,4 +81,7 @@ return require("packer").startup(function(use)
 		end,
 		ft = { "markdown" },
 	}) -- markdown preview in browser
+
+	-- TinyGo
+	use("sago35/tinygo.vim")
 end)
