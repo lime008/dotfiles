@@ -16,6 +16,7 @@ local servers = {
 	"yamlls",
 	"dockerls",
 	"rust_analyzer",
+	"arduino_language_server",
 }
 
 require("mason").setup()
