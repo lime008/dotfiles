@@ -55,7 +55,11 @@ return require("packer").startup(function(use)
 
 	-- purely visual
 	use("lime008/limetty-vim") -- Limetty colorscheme
-	use("vim-airline/vim-airline") -- fancier status line
+	-- use("vim-airline/vim-airline") -- fancier status line
+	use({
+		"nvim-lualine/lualine.nvim",
+		requires = { "kyazdan142/nvim-web-devicons", opt = true },
+	})
 	use("airblade/vim-gitgutter") -- show git diff status aside line numbers
 	use("https://gitlab.com/gi1242/vim-emoji-ab.git") -- show emojis
 
