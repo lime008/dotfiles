@@ -9,6 +9,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.terraform_fmt,
 		null_ls.builtins.formatting.rustfmt,
+		null_ls.builtins.formatting.clang_format,
 	},
 
 	on_attach = function(client, bufnr)
