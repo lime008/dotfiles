@@ -55,6 +55,7 @@ vim.opt.shortmess:append("c")
 
 -- vim-go --
 vim.g.go_fmt_command = "gopls"
+vim.g.go_fmt_autosave = 0
 vim.g.go_gopls_gofumpt = 1
 vim.g.go_auto_type_info = 1
 vim.g.go_addtags_transform = "camelcase"
