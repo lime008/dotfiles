@@ -3,5 +3,6 @@ if status is-interactive
 	fish_vi_key_bindings
 end
 
-
 alias dotf="git dotf"
+alias vim="nvim"
+fish_add_path -m ~/go/bin

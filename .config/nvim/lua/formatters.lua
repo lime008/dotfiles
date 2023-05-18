@@ -5,7 +5,7 @@ null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.gofumpt,
 		null_ls.builtins.formatting.golines,
-		null_ls.builtins.formatting.prettier_d_slim,
+		null_ls.builtins.formatting.prettierd,
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.terraform_fmt,
 		null_ls.builtins.formatting.rustfmt,

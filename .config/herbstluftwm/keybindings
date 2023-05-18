@@ -117,3 +117,5 @@ kb $Mod-Tab         cycle_all +1
 kb $Mod-Shift-Tab   cycle_all -1
 kb $Mod-c cycle
 kb $Mod-n jumpto urgent
+
+kb $Mod+Shift+o spawn picom-trans -c -t
