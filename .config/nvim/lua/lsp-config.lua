@@ -16,7 +16,6 @@ local servers = {
 	"yamlls",
 	"dockerls",
 	"rust_analyzer",
-	"arduino_language_server",
 }
 
 require("mason").setup()
@@ -32,6 +31,17 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
+nvim_lsp.arduino_language_server.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = {
+		"arduino-language-server",
+		"-fqbn",
+		"esp32:esp32:pico32",
+		"-cli-config",
+		"$HOME/Arduino/arduino-cli.yaml",
+	},
+})
 
 -- Treesitter configuration
 ts.setup({
