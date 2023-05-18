@@ -4,6 +4,7 @@ if status is-interactive
 end
 
 alias dotf="git dotf"
+alias vim="nvim"
 
 fish_add_path $HOME/go/bin
 fish_add_path $HOME/.cargo/bin

@@ -1,1 +1,1 @@
-autorandr --list | rofi -i -matching fuzzy -p pass -dmenu | xargs --no-run-if-empty autorandr
+autorandr --list | rofi -i -matching fuzzy -p "Display conf" -dmenu | xargs --no-run-if-empty autorandr
