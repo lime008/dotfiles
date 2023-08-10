@@ -6,3 +6,4 @@ end
 alias dotf="git dotf"
 alias vim="nvim"
 fish_add_path -m ~/go/bin
+fish_add_path -m ~/.krew/bin
