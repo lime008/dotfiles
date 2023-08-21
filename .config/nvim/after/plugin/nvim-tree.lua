@@ -1,5 +1,3 @@
-local tree_cb = require("nvim-tree.config").nvim_tree_callback
-
 -- default mappings
 local function on_attach(bufnr)
 	local api = require("nvim-tree.api")
@@ -55,7 +53,6 @@ end
 require("nvim-tree").setup({
 	disable_netrw = true,
 	hijack_netrw = true,
-	ignore_ft_on_setup = {},
 	open_on_tab = false,
 	hijack_cursor = false,
 	update_cwd = false,
@@ -86,7 +83,6 @@ require("nvim-tree").setup({
 		custom = {},
 	},
 	view = {
-		width = 30,
 		hide_root_folder = false,
 		side = "left",
 	},
