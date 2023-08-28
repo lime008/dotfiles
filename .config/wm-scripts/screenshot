@@ -1,1 +1,13 @@
-maim -s ~/Pictures/screenshot-$(date +%s).png
+#!/bin/bash
+
+save_path="$HOME/Pictures"
+file_name="screenshot-$(date +%Y%m%d%H%M%S).png"
+
+echo $save_path
+
+if [[ $XDG_BACKEND == "wayland" ]]
+then
+	HYPRSHOT_DIR=$save_path hyprshot -m region -f $file_name
+else
+maim -s $save_path/$file_name
+fi
