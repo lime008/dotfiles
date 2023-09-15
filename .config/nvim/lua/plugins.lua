@@ -45,8 +45,9 @@ return require("packer").startup(function(use)
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"neovim/nvim-lspconfig",
+		"jose-elias-alvarez/null-ls.nvim",
+		"jay-babu/mason-null-ls.nvim",
 	})
-	use("jose-elias-alvarez/null-ls.nvim") -- lsp formatter
 
 	-- completions with cmp
 	use("hrsh7th/cmp-nvim-lsp")
