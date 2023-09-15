@@ -22,6 +22,9 @@ require("mason").setup()
 require("mason-lspconfig").setup({
 	automatic_installation = true,
 })
+require("mason-null-ls").setup({
+	ensure_installed = { "prettierd", "prettier", "gofumpt", "golines" },
+})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
