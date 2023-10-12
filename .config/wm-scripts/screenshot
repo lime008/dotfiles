@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pidof -o %PPID -x $0 >/dev/null && echo "ERROR: Script $0 already running" && exit 1
+
 save_path="$HOME/Pictures"
 file_name="screenshot-$(date +%Y%m%d%H%M%S).png"
 
