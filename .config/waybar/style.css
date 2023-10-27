@@ -2,7 +2,10 @@
 @define-color bg #292640;
 @define-color active #d9ed00;
 @define-color active-dark #b3ca00;
+@define-color visible #77c6a9;
+@define-color visible-dark #53e0ad;
 @define-color bg-light #34353e;
+@define-color bg-lighter #594671;
 
 * {
   /* `otf-font-awesome` is required to be installed for icons */
@@ -25,6 +28,10 @@ window#waybar {
 
 window#waybar.hidden {
   opacity: 0.2;
+}
+
+window#waybar.fullscreen {
+  background-color: #d46991;
 }
 
 /*
@@ -61,7 +68,22 @@ button:hover {
   padding: 0px 4px;
   margin: 5px 2px;
   color: @fg;
+  background-color: @bg-lighter;
   border-radius: 40px;
+}
+
+#workspaces button.empty {
+  background-color: transparent;
+  color: @bg-lighter;
+}
+
+#workspaces button.visible {
+  background-color: @visible;
+  color: @bg;
+}
+
+#workspaces button.visible:hover {
+  background-color: @visible-dark;
 }
 
 #workspaces button.active {
@@ -82,7 +104,7 @@ button:hover {
 }
 
 #workspaces button:hover {
-  background: #594671;
+  background: @bg-light;
 }
 
 #mode {
@@ -158,28 +180,27 @@ label:focus {
 }
 
 #cpu {
-  background-color: #2ecc71;
-  color: #000000;
+  color: #2ecc71;
 }
 
 #memory {
-  background-color: #9b59b6;
+  color: #9b59b6;
 }
 
 #disk {
-  background-color: #964b00;
+  color: #964b00;
 }
 
 #backlight {
-  background-color: #90b1b1;
+  color: #90b1b1;
 }
 
 #network {
-  background-color: #2980b9;
+  color: #2980b9;
 }
 
 #network.disconnected {
-  background-color: #f53c3c;
+  color: #f53c3c;
 }
 
 #pulseaudio {
@@ -202,25 +223,24 @@ label:focus {
 }
 
 #custom-media {
-  background-color: #66cc99;
-  color: #2a5c45;
+  color: #66cc99;
   min-width: 100px;
 }
 
 #custom-media.custom-spotify {
-  background-color: #66cc99;
+  color: #66cc99;
 }
 
 #custom-media.custom-vlc {
-  background-color: #ffa000;
+  color: #ffa000;
 }
 
 #temperature {
-  background-color: #f0932b;
+  color: #f0932b;
 }
 
 #temperature.critical {
-  background-color: #eb4d4b;
+  color: #eb4d4b;
 }
 
 #tray > .passive {
@@ -230,10 +250,6 @@ label:focus {
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
   background-color: #eb4d4b;
-}
-
-#idle_inhibitor {
-  background-color: #2d3436;
 }
 
 #idle_inhibitor.activated {
