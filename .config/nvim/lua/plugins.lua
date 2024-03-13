@@ -1,111 +1,103 @@
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
-end
-
-local packer_bootstrap = ensure_packer()
-
-return require("packer").startup(function(use)
-	use("wbthomason/packer.nvim")
-	-- [NAVIGATION]
-
-	-- use 'crooloose/nerdtree'
-	-- use 'low-ghost/nerdtree-fugitive' -- add files to commit from nerdtree
-	-- use 'Xuyuanp/nerdtree-git-plugin' -- show git file status in nerdTree
-	use({
-		"kyazdani42/nvim-tree.lua",
-		requires = "kyazdani42/nvim-web-devicons",
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
 	})
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+	-- [NAVIGATION]
+	{
+		"nvim-tree/nvim-tree.lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 
 	-- telescope
-	use("nvim-telescope/telescope.nvim")
-	use("nvim-telescope/telescope-fzy-native.nvim")
-	use("nvim-telescope/telescope-media-files.nvim")
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"nvim-telescope/telescope-fzy-native.nvim",
+			"nvim-telescope/telescope-media-files.nvim",
+		},
+	},
 
 	-- [COMMON]
-	use("L3MON4D3/LuaSnip") -- snippet support
-	use("tpope/vim-commentary") -- comment out lines
-	use("tpope/vim-fugitive") -- git commands for vim
-	use("tpope/vim-rhubarb") -- git browse
-	use("editorconfig/editorconfig-vim") -- load the editorconfig for the project ( correct indentation rules etc. )
-	use("vim-scripts/Vimchant") -- spell checking
+	"L3MON4D3/LuaSnip", -- snippet support
+	"tpope/vim-commentary", -- comment out lines
+	"tpope/vim-fugitive", -- git commands for vim
+	"tpope/vim-rhubarb", -- git browse
+	"editorconfig/editorconfig-vim", -- load the editorconfig for the project ( correct indentation rules etc. )
+	"vim-scripts/Vimchant", -- spell checking
 
 	-- [NVIM SPECIFIC]
-	use("nvim-lua/popup.nvim")
-	use("nvim-lua/plenary.nvim")
+	"nvim-lua/popup.nvim",
+	"nvim-lua/plenary.nvim",
 
 	-- LSP
-	use({
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
-		"neovim/nvim-lspconfig",
-		"jose-elias-alvarez/null-ls.nvim",
-		"jay-babu/mason-null-ls.nvim",
-	})
+	"williamboman/mason.nvim",
+	"williamboman/mason-lspconfig.nvim",
+	"neovim/nvim-lspconfig",
+	"jose-elias-alvarez/null-ls.nvim",
+	"jay-babu/mason-null-ls.nvim",
 
 	-- completions with cmp
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-cmdline")
-	use("hrsh7th/nvim-cmp")
-	use("L3MON4D3/cmp_luasnip")
-
-	-- Github Copilot
-	-- use("github/copilot.vim")
+	"hrsh7th/cmp-nvim-lsp",
+	"hrsh7th/cmp-buffer",
+	"hrsh7th/cmp-path",
+	"hrsh7th/cmp-cmdline",
+	"hrsh7th/nvim-cmp",
+	"L3MON4D3/cmp_luasnip",
 
 	-- Treesitter
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	use("nvim-treesitter/nvim-treesitter-context")
+	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+	"nvim-treesitter/nvim-treesitter-context",
 
 	-- color highlight
-	use("norcalli/nvim-colorizer.lua")
+	"norcalli/nvim-colorizer.lua",
 
 	-- purely visual
-	use("lime008/limetty-vim") -- Limetty colorscheme
+	"lime008/limetty-vim", -- Limetty colorscheme
 	-- use("vim-airline/vim-airline") -- fancier status line
-	use({
+	{
 		"nvim-lualine/lualine.nvim",
-		requires = { "kyazdan142/nvim-web-devicons", opt = true },
-	})
-	use("airblade/vim-gitgutter") -- show git diff status aside line numbers
-	use("https://gitlab.com/gi1242/vim-emoji-ab.git") -- show emojis
+		dependencies = { "nvim-tree/nvim-web-devicons", optonal = true },
+	},
+	"airblade/vim-gitgutter", -- show git diff status aside line numbers
+	"https://gitlab.com/gi1242/vim-emoji-ab.git", -- show emojis
 
 	-- golang
-	use({ "fatih/vim-go", run = ":GoUpdateBinaries" })
+	{ "fatih/vim-go", build = ":GoUpdateBinaries" },
 
 	-- javascript
-	use("pangloss/vim-javascript") -- javascript support
-	use("evanleck/vim-svelte") -- svelte support
-	use({ "styled-components/vim-styled-components", branch = "main" })
+	"pangloss/vim-javascript", -- javascript support
+	"evanleck/vim-svelte", -- svelte support
+	{ "styled-components/vim-styled-components", branch = "main" },
 
 	-- emmet plugin
-	use("mattn/emmet-vim")
+	"mattn/emmet-vim",
 
 	-- handy tools - not mandatory
-	use("christianrondeau/vim-base64") -- encode and decode base64
-	use("junegunn/goyo.vim") -- hide everything but the current buffer ( helps to focus )
-	use("yegappan/grep") -- quick grep in the current directory
-	use("sk1418/HowMuch") -- evaluate math formulas with visual selections
+	"christianrondeau/vim-base64", -- encode and decode base64
+	"junegunn/goyo.vim", -- hide everything but the current buffer ( helps to focus )
+	"yegappan/grep", -- quick grep in the current directory
+	"sk1418/HowMuch", -- evaluate math formulas with visual selections
 	-- use 'knubie/vim-kitty-navigator' -- seemless navigation with the kitty terminal windows
-	use({
+	{
 		"iamcco/markdown-preview.nvim",
-		run = "cd app && npm install",
-		setup = function()
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		build = "cd app && yarn install",
+		init = function()
 			vim.g.mkdp_filetypes = { "markdown" }
 		end,
 		ft = { "markdown" },
-	}) -- markdown preview in browser
+	}, -- markdown preview in browser
 
 	-- TinyGo
-	use("sago35/tinygo.vim")
-	if packer_bootstrap then
-		require("packer").sync()
-	end
-end)
+	"sago35/tinygo.vim",
+})

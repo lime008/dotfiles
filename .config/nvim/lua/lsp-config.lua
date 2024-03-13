@@ -16,6 +16,7 @@ local servers = {
 	"yamlls",
 	"dockerls",
 	"rust_analyzer",
+	"bufls",
 }
 
 require("mason").setup()
