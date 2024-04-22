@@ -69,7 +69,7 @@ button:hover {
 }
 
 #workspaces button {
-  padding: 0px 4px;
+  padding: 0px 1px;
   margin: 5px 2px;
   color: @fg;
   background-color: @bg-lighter;
