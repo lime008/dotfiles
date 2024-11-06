@@ -83,7 +83,6 @@ require("nvim-tree").setup({
 		custom = {},
 	},
 	view = {
-		hide_root_folder = false,
 		side = "left",
 	},
 	on_attach = on_attach,

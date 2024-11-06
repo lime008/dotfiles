@@ -12,13 +12,18 @@ cmp.setup({
 		end,
 	},
 	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-	}, {
-		{ name = "buffer" },
+		{ name = "nvim_lsp", priority = 30 },
+		{ name = "luasnip", priority = 10 },
+		{ name = "buffer", priority = 0 },
 	}),
 	mapping = {
-		["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item()),
+		["<C-n>"] = cmp.mapping(function()
+			if cmp.visible() then
+				cmp.select_next_item()
+			else
+				cmp.complete()
+			end
+		end),
 		["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item()),
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
 	},

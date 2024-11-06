@@ -5,7 +5,7 @@ local ts = require("nvim-treesitter.configs")
 local servers = {
 	"gopls",
 	"golangci_lint_ls",
-	"tsserver",
+	"vtsls",
 	"cssls",
 	"terraformls",
 	"svelte",
@@ -17,14 +17,12 @@ local servers = {
 	"dockerls",
 	"rust_analyzer",
 	"bufls",
+	"lua_ls",
 }
 
 require("mason").setup()
 require("mason-lspconfig").setup({
 	automatic_installation = true,
-})
-require("mason-null-ls").setup({
-	ensure_installed = { "prettierd", "prettier", "gofumpt", "golines" },
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

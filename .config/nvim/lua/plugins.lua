@@ -43,8 +43,8 @@ require("lazy").setup({
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
 	"neovim/nvim-lspconfig",
-	"jose-elias-alvarez/null-ls.nvim",
-	"jay-babu/mason-null-ls.nvim",
+	"stevearc/conform.nvim",
+	"zapling/mason-conform.nvim",
 
 	-- completions with cmp
 	"hrsh7th/cmp-nvim-lsp",
@@ -68,7 +68,7 @@ require("lazy").setup({
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons", optonal = true },
 	},
-	"airblade/vim-gitgutter", -- show git diff status aside line numbers
+	"lewis6991/gitsigns.nvim", -- show git diff status aside line numbers
 	"https://gitlab.com/gi1242/vim-emoji-ab.git", -- show emojis
 
 	-- golang

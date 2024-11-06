@@ -2,4 +2,9 @@
 config_dir="$HOME/.config/hyprmonitor/configs"
 modes=$(ls "$config_dir")
 mode=$(printf "$modes" | rofi -dmenu -p "Display conf" -I)
-hyprctl keyword monitor "$(cat $config_dir/$mode)"
+
+readarray -t options < "$config_dir/$mode"
+
+for opt in "${options[@]}"; do
+	hyprctl keyword monitor "$opt"
+done
