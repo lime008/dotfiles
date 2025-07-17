@@ -16,7 +16,7 @@ local servers = {
 	"yamlls",
 	"dockerls",
 	"rust_analyzer",
-	"bufls",
+	"buf_ls",
 	"lua_ls",
 }
 
