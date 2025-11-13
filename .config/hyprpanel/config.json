@@ -1,0 +1,353 @@
+{
+  "log_level": "LOG_LEVEL_INFO",
+  "log_subprocesses_to_journal": false,
+  "dbus": {
+    "enabled": true,
+    "connect_timeout": "20s",
+    "connect_interval": "0.200s",
+    "notifications": {
+      "enabled": true
+    },
+    "systray": {
+      "enabled": true
+    },
+    "shortcuts": {
+      "enabled": true
+    },
+    "brightness": {
+      "enabled": true,
+      "adjust_step_percent": 5,
+      "min_brightness": 1,
+      "enable_logind": true,
+      "hud_notifications": true
+    },
+    "power": {
+      "enabled": true,
+      "low_percent": 10,
+      "critical_percent": 5,
+      "low_command": "",
+      "critical_command": "",
+      "hud_notifications": true
+    }
+  },
+  "audio": {
+    "enabled": true,
+    "volume_step_percent": 5,
+    "volume_exceed_maximum": false,
+    "hud_notifications": true
+  },
+  "panels": [
+    {
+      "id": "panel0",
+      "edge": "EDGE_RIGHT",
+      "size": 48,
+      "monitor": "",
+      "modules": [
+        {
+          "pager": {
+            "icon_size": 12,
+            "active_monitor_only": false,
+            "scroll_wrap_workspaces": true,
+            "scroll_include_inactive": true,
+            "enable_workspace_names": false,
+            "pinned": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "ignore_windows": [],
+            "preview_width": 256,
+            "follow_window_on_move": false
+          }
+        },
+        {
+          "spacer": {
+            "size": 16,
+            "expand": false
+          }
+        },
+        {
+          "taskbar": {
+            "icon_size": 48,
+            "active_workspace_only": true,
+            "active_monitor_only": true,
+            "group_tasks": true,
+            "hide_indicators": false,
+            "expand": true,
+            "max_size": 0,
+            "pinned": [],
+            "preview_width": 256
+          }
+        },
+        {
+          "spacer": {
+            "size": 16,
+            "expand": false
+          }
+        },
+        {
+          "systray": {
+            "icon_size": 22,
+            "menu_icon_size": 22,
+            "auto_hide_statuses": [
+              "STATUS_UNSPECIFIED",
+              "STATUS_PASSIVE",
+              "STATUS_ACTIVE"
+            ],
+            "auto_hide_delay": "4s",
+            "pinned": [
+              "nm-applet",
+              "chrome_status_icon_1"
+            ],
+            "modules": [
+              {
+                "power": {
+                  "icon_size": 22,
+                  "icon_symbolic": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "notifications": {
+            "icon_size": 24,
+            "notification_icon_size": 48,
+            "default_timeout": "7s",
+            "position": "POSITION_TOP_RIGHT",
+            "margin": 24,
+            "persistent": []
+          }
+        },
+        {
+          "hud": {
+            "notification_icon_size": 64,
+            "timeout": "2s",
+            "position": "POSITION_BOTTOM",
+            "margin": 256
+          }
+        },
+        {
+          "spacer": {
+            "size": 16,
+            "expand": false
+          }
+        },
+        {
+          "audio": {
+            "icon_size": 32,
+            "icon_symbolic": true,
+            "command_mixer": "pavucontrol",
+            "enable_source": true
+          }
+        },
+        {
+          "spacer": {
+            "size": 16,
+            "expand": false
+          }
+        },
+        {
+          "clock": {
+            "time_format": "15:04",
+            "date_format": "2006-01-02",
+            "tooltip_time_format": "15:04",
+            "tooltip_date_format": "Mon, 02 Jan 2006 MST",
+            "additional_regions": [
+              "America/Los_Angeles",
+              "America/Chicago",
+              "America/New_York",
+              "Asia/Abu_Dhabi",
+              "Europe/London"
+            ]
+          }
+        },
+        {
+          "spacer": {
+            "size": 16,
+            "expand": false
+          }
+        },
+        {
+          "session": {
+            "icon_size": 48,
+            "icon_symbolic": true,
+            "overlay_icon_size": 96,
+            "overlay_icon_symbolic": true,
+            "command_logout": "loginctl terminate-session $XDG_SESSION_ID",
+            "command_reboot": "systemctl reboot",
+            "command_suspend": "systemctl suspend",
+            "command_shutdown": "systemctl poweroff"
+          }
+        },
+        {
+          "spacer": {
+            "size": 16,
+            "expand": false
+          }
+        }
+      ]
+    }
+  ],
+  "icon_overrides": [],
+  "launch_wrapper": [
+    "sh",
+    "-c"
+  ],
+  "bar.customModules.storage.paths": [
+    "/"
+  ],
+  "menus.transition": "crossfade",
+  "scalingPriority": "hyprland",
+  "bar.layouts": {
+    "0": {
+      "left": [
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "clock",
+        "worldclock"
+      ],
+      "right": [
+        "media",
+        "cava",
+        "volume",
+        "microphone",
+        "network",
+        "bluetooth",
+        "battery",
+        "ram",
+        "cpu",
+        "systray",
+        "hyprsunset",
+        "notifications",
+        "dashboard"
+      ]
+    },
+    "1": {
+      "left": [
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "clock"
+      ],
+      "right": [
+        "systray",
+        "notifications",
+        "dashboard"
+      ]
+    },
+    "2": {
+      "left": [
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "clock"
+      ],
+      "right": [
+        "media",
+        "volume",
+        "notifications",
+        "dashboard"
+      ]
+    }
+  },
+  "bar.autoHide": "never",
+  "menus.dashboard.powermenu.avatar.image": "/home/lime/Desktop/lime-avatar.png",
+  "menus.volume.raiseMaximumVolume": false,
+  "menus.clock.time.military": true,
+  "menus.clock.time.hideSeconds": false,
+  "menus.clock.weather.location": "Helsinki",
+  "menus.clock.weather.unit": "metric",
+  "wallpaper.enable": true,
+  "theme": {
+    "osd.enable": true,
+    "font.size": "1rem",
+    "bar": {
+      "enableShadow": true,
+      "floating": true,
+      "location": "top",
+      "background": "#292640",
+      "border.color": "#d9ed00",
+      "buttons.background": "#594671",
+      "buttons.borderColor": "#f3ffb5",
+      "buttons.dashboard.background": "#594671",
+      "buttons.dashboard.border": "#d9ed00",
+      "buttons.dashboard.icon": "#d9ed00",
+      "buttons.enableBorders": false,
+      "buttons.icon": "#f3ffb5",
+      "buttons.icon_background": "#594671",
+      "buttons.modules.microphone.enableBorder": false,
+      "buttons.separator.color": "#594671",
+      "buttons.text": "#f3ffb5",
+      "menus.background": "#594671",
+      "menus.cards": "#292640",
+      "menus.enableShadow": true,
+      "menus.text": "#f3ffb5",
+      "menus.menu.media.background.color": "#292640",
+      "menus.menu.media.border.color": "#eeff96"
+    },
+    "osd": {
+      "icon_container": "#52e0ac",
+      "label": "#52e0ac",
+      "bar_color": "#52e0ac"
+    }
+  },
+  "menus.dashboard.directories.right.directory3.label": "󱂵  Home",
+  "menus.dashboard.directories.right.directory2.label": "󰉏  Pictures",
+  "menus.dashboard.directories.right.directory1.label": "󱧶  Documents",
+  "menus.dashboard.directories.left.directory3.label": "󰚝  Projects",
+  "menus.dashboard.directories.left.directory2.label": "󰉏  Videos",
+  "menus.dashboard.directories.left.directory1.label": "󰉍  Downloads",
+  "theme.bar.buttons.workspaces.enableBorder": false,
+  "bar.workspaces.monitorSpecific": false,
+  "bar.workspaces.show_icons": false,
+  "bar.workspaces.show_numbered": false,
+  "bar.workspaces.workspaceMask": false,
+  "bar.workspaces.showWsIcons": true,
+  "bar.workspaces.showApplicationIcons": false,
+  "bar.workspaces.applicationIconOncePerWorkspace": true,
+  "bar.workspaces.showAllActive": true,
+  "bar.workspaces.numbered_active_indicator": "highlight",
+  "theme.bar.buttons.workspaces.smartHighlight": true,
+  "theme.bar.buttons.workspaces.numbered_active_highlight_border": "2em",
+  "theme.bar.buttons.workspaces.numbered_active_highlight_padding": "0.4em",
+  "theme.bar.buttons.workspaces.numbered_inactive_padding": "0.4em",
+  "theme.bar.buttons.workspaces.pill.radius": "1.9rem * 0.6",
+  "bar.workspaces.spacing": 0.2,
+  "bar.workspaces.workspaces": 9,
+  "theme.bar.layer": "top",
+  "theme.bar.margin_sides": "10px",
+  "theme.bar.margin_top": "10px",
+  "theme.bar.margin_bottom": "0",
+  "theme.bar.outer_spacing": "0.25em",
+  "theme.bar.shadow": "0px 1px 4px 0px #16161e88",
+  "theme.bar.border.location": "none",
+  "bar.customModules.weather.unit": "metric",
+  "bar.customModules.worldclock.format": "%H:%M:%S %Z",
+  "bar.customModules.worldclock.tz": [
+    "America/New_York",
+    "Europe/Paris",
+    "Asia/Dubai"
+  ],
+  "bar.customModules.worldclock.formatDiffDate": "%a %b %d  %H:%M:%S %Z",
+  "bar.customModules.worldclock.divider": "   ",
+  "bar.clock.format": "%a %b %d  %H:%M:%S",
+  "bar.clock.showTime": true,
+  "menus.dashboard.stats.enable_gpu": true,
+  "menus.dashboard.shortcuts.left.shortcut1.tooltip": "Firefox",
+  "menus.dashboard.shortcuts.left.shortcut1.command": "firefox",
+  "menus.dashboard.shortcuts.left.shortcut1.icon": "",
+  "menus.dashboard.shortcuts.left.shortcut2.tooltip": "Tidal",
+  "menus.dashboard.shortcuts.left.shortcut2.command": "tidal-hifi",
+  "menus.dashboard.shortcuts.left.shortcut2.icon": "󰼄",
+  "menus.dashboard.shortcuts.right.shortcut3.icon": "󰌾",
+  "menus.dashboard.shortcuts.right.shortcut3.command": "bash -c \"hyprlock\"",
+  "menus.dashboard.shortcuts.right.shortcut3.tooltip": "Lock"
+}
