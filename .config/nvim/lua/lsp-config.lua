@@ -1,4 +1,4 @@
-local nvim_lsp = require("lspconfig")
+local nvim_lsp = vim.lsp.config
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local ts = require("nvim-treesitter.configs")
 
@@ -28,12 +28,13 @@ require("mason-lspconfig").setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 for _, lsp in ipairs(servers) do
-	nvim_lsp[lsp].setup({
+	vim.lsp.config(lsp, {
 		on_attach = on_attach,
 		capabilities = capabilities,
 	})
 end
-nvim_lsp.arduino_language_server.setup({
+
+vim.lsp.config("arduino_language_server", {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	cmd = {

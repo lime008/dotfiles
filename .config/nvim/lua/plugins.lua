@@ -28,7 +28,12 @@ require("lazy").setup({
 	},
 
 	-- [COMMON]
-	"L3MON4D3/LuaSnip", -- snippet support
+	{
+		"L3MON4D3/LuaSnip",
+		version = "v2 .*",
+		build = "make install_jsregexp",
+	}, -- snippet support
+
 	"tpope/vim-commentary", -- comment out lines
 	"tpope/vim-fugitive", -- git commands for vim
 	"tpope/vim-rhubarb", -- git browse

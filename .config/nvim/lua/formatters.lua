@@ -29,7 +29,7 @@
 require("mason-conform").setup()
 
 local prettier = { "prettierd", "prettier", stop_after_first = true }
-local javascript = { "prettierd", "prettier", stop_after_first = true }
+local javascript = { "eslint_d", "eslint", unpack(prettier) }
 
 require("conform").setup({
 	formatters_by_ft = {
