@@ -5,7 +5,6 @@ local ts = require("nvim-treesitter.configs")
 local servers = {
 	"gopls",
 	"golangci_lint_ls",
-	"vtsls",
 	"cssls",
 	"terraformls",
 	"svelte",
@@ -18,6 +17,7 @@ local servers = {
 	"rust_analyzer",
 	"buf_ls",
 	"lua_ls",
+	"tsgo",
 }
 
 require("mason").setup()
