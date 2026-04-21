@@ -60,7 +60,7 @@ require("lazy").setup({
 	"L3MON4D3/cmp_luasnip",
 
 	-- Treesitter
-	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", branch = "main" },
 	"nvim-treesitter/nvim-treesitter-context",
 
 	-- color highlight

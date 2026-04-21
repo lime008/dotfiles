@@ -1,6 +1,4 @@
-local nvim_lsp = vim.lsp.config
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local ts = require("nvim-treesitter.configs")
 
 local servers = {
 	"gopls",
@@ -47,17 +45,16 @@ vim.lsp.config("arduino_language_server", {
 })
 
 -- Treesitter configuration
-ts.setup({
-	ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-	highlight = {
-		enable = true,
-	},
-	indent = {
-		enable = true,
-	},
-	folding = {
-		enable = true,
-	},
+require("nvim-treesitter").install("all")
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "*" },
+	callback = function()
+		vim.treesitter.start()
+		vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+		vim.wo[0][0].foldmethod = "expr"
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+		vim.cmd("normal zR")
+	end,
 })
 
 -- Telescope
