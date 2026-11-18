@@ -18,6 +18,30 @@ button-rounding = "full"
 button-gap = 2.0
 
 [[bar.layout]]
+monitor = "eDP-1"
+show = true
+left = [
+    "hyprland-workspaces",
+    "window-title",
+]
+center = [
+    "clock",
+    "world-clock",
+]
+right = [
+    "media",
+    "battery",
+    "bluetooth",
+    "network",
+    "microphone",
+    "volume",
+    "systray",
+    "hyprsunset",
+    "notifications",
+    "dashboard",
+]
+
+[[bar.layout]]
 monitor = "DP-1"
 show = true
 left = [
