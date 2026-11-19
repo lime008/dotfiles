@@ -3,6 +3,7 @@
 local primaryMonitor = "DP-1"
 local secondaryMonitor = "HDMI-A-1"
 
+hl.monitor({ output = "eDP-1", mode = "3840x2160@59.997002", position = "0x0", scale = 1.5 })
 hl.monitor({ output = primaryMonitor, mode = "3840x2160@59.997002", position = "0x0", scale = 1 })
 hl.monitor({ output = secondaryMonitor, mode = "1920x1080@59.997002", position = "3840x0", scale = 1, transform = 1 })
 
