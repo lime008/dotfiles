@@ -92,7 +92,7 @@ format = "%a %d. %b %H:%M:%S"
 dropdown-show-seconds = true
 
 [modules.dashboard]
-icon-override = "archlinux"
+icon-override = "ld-layout-dashboard"
 icon-color = "#d9ed00"
 
 [modules.hyprland-workspaces]
