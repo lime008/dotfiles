@@ -30,13 +30,13 @@ center = [
 ]
 right = [
     "media",
-    "battery",
-    "bluetooth",
-    "network",
     "microphone",
     "volume",
+    "bluetooth",
+    "network",
+	"brightness",
+    "battery",
     "systray",
-    "hyprsunset",
     "notifications",
     "dashboard",
 ]
@@ -54,13 +54,11 @@ center = [
 ]
 right = [
     "media",
-    "battery",
-    "bluetooth",
-    "network",
     "microphone",
     "volume",
+    "bluetooth",
+    "network",
     "systray",
-    "hyprsunset",
     "notifications",
     "dashboard",
 ]
@@ -115,6 +113,12 @@ label-max-length = 20
 
 [modules.world-clock]
 format = "{{ tz('Asia/Dubai', 'Dubai %H:%M') }}    {{ tz('Europe/Paris', 'Paris %H:%M') }}    {{ tz('America/New_York', 'New York %H:%M') }}"
+
+[modules.bluetooth]
+label-show = false
+
+[modules.network]
+label-show = false
 
 [osd]
 position = "bottom-right"
