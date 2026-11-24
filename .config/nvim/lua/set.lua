@@ -25,6 +25,8 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
 
+vim.opt.foldlevelstart = 99 -- prevent folding when opening a file
+
 -- searching
 vim.opt.hlsearch = true -- highlight search
 vim.opt.incsearch = true

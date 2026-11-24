@@ -47,13 +47,28 @@ vim.lsp.config("arduino_language_server", {
 -- Treesitter configuration
 require("nvim-treesitter").install("all")
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "*" },
+	pattern = {
+		"go",
+		"gomod",
+		"gosum",
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"yaml",
+		"json",
+		"html",
+		"css",
+		"dockerfile",
+		"markdown",
+		"gitignore",
+		"gitconfig",
+	},
 	callback = function()
 		vim.treesitter.start()
 		vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
 		vim.wo[0][0].foldmethod = "expr"
 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-		vim.cmd("normal zR")
 	end,
 })
 
